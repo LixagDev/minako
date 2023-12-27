@@ -1,13 +1,14 @@
 "use client"
-import {Avatar, Link, Dropdown} from "react-daisyui";
+import {Avatar, Button, Dropdown, Link} from "react-daisyui";
 import {useRouter} from "next/navigation";
-import {MoreVertical, Star, MessageSquare} from "react-feather";
+import {MessageSquare, MoreVertical, Star} from "react-feather";
 import axios from "axios";
 import Markdown from "react-markdown";
+import {Suspense} from "react";
+import Loading from "@/app/loading"
 
-export default function Messages({messages, userSessionData}) {
+export default function Messages({messages, userSessionData, skip, messageListDiv}) {
     const router = useRouter();
-
     const dateChanger = (messageDate) => {
         const today = ((new Date().getTime())/1000).toFixed(0);
         const resultMessageDate = messageDate;
@@ -15,7 +16,7 @@ export default function Messages({messages, userSessionData}) {
         const hoursBetween = (today/3600)-(resultMessageDate/3600);
         const secondsBetween = (today-resultMessageDate);
         if (secondsBetween.toFixed(0) < 0){
-            const fullDate = new Date(new Number(resultMessageDate)*1000);
+            const fullDate = new Date(Number(resultMessageDate)*1000);
             return `${fullDate.getDate()}/${fullDate.getMonth()}/${fullDate.getFullYear()}`;
         }
         else if (secondsBetween.toFixed(0) <= 15){
@@ -31,9 +32,16 @@ export default function Messages({messages, userSessionData}) {
             return `Il y a ${hoursBetween.toFixed(0)}h`;
         }
         else{
-            const fullDate = new Date(new Number(resultMessageDate)*1000);
+            const fullDate = new Date(Number(resultMessageDate)*1000);
             return `${fullDate.getDate()}/${fullDate.getMonth()}/${fullDate.getFullYear()}`;
         }
+    }
+
+    const getResponse = (messageId) => {
+        return axios.get(`/api/get/message?id=${messageId}`)
+            .then((response) => {
+                return response.data.responses;
+            });
     }
 
     const deleteMessage = (messageId) => {
@@ -43,12 +51,22 @@ export default function Messages({messages, userSessionData}) {
             });
     }
 
+    const loadMore = () => {
+        router.push(`/home?skip=${Number(skip)+10}`);
+        messageListDiv.current.scrollTo({top: 0, behavior: 'smooth' });
+    }
+
+    const backUp = () => {
+        router.push("/home");
+        messageListDiv.current.scrollTo({top: 0, behavior: 'smooth' });
+    }
+
     return (
-        <>
+        <Suspense fallback={<Loading/>}>
             {
                 messages.map((message) => {
                     return (
-                        <div key={message.id} className={"w-full bg-base-200 border-b border-neutral flex gap-3 p-4 cursor-pointer"}>
+                        <div key={message.id} className={"w-full bg-base-200 border-b border-neutral flex gap-3 p-4 cursor-pointer"} onClick={() => router.push(`/message/${message.id}`)}>
                             <Avatar onClick={() => router.push(`/user/${message.owner.name}`)} className={"cursor-pointer"} shape={"circle"}
                                     src={message.owner.image} border borderColor={"neutral"}
                                     size={"sm"}/>
@@ -56,13 +74,12 @@ export default function Messages({messages, userSessionData}) {
                                 <div className={"flex gap-2 items-center"}>
                                     <Link onClick={() => router.push(`/user/${message.owner.name}`)}
                                           className={"font-bold"}>@{message.owner.name} </Link>
-                                    {message.owner.isPremium ? <Star width={15} strokeWidth={4}></Star> : null}
-                                    <h3 className={"text-xs"}
-                                        suppressHydrationWarning>{dateChanger(message.created_at)}</h3>
+                                    {message.owner.isPremium ? <Star width={15} strokeWidth={4}/> : null}
+                                    <h3 className={"text-xs"} suppressHydrationWarning>{dateChanger(message.created_at)}</h3>
                                 </div>
                                 <h3><Markdown className={"whitespace-break-spaces"}>{message.content}</Markdown></h3>
                                 <div className={"flex gap-1 items-center"}>
-                                    <h4 className={"text-sm"}>{message.responses.length}</h4>
+                                    <h4 className={"text-sm"} suppressHydrationWarning>{getResponse(message.id)}</h4>
                                     <MessageSquare size={15}/>
                                 </div>
                             </div>
@@ -70,7 +87,7 @@ export default function Messages({messages, userSessionData}) {
                                 {
                                     userSessionData.id === message.owner.id ?
                                         <Dropdown horizontal={"left"}>
-                                            <Dropdown.Toggle size={"sm"}><MoreVertical></MoreVertical></Dropdown.Toggle>
+                                            <Dropdown.Toggle size={"sm"}><MoreVertical /></Dropdown.Toggle>
                                             <Dropdown.Menu className="w-52">
                                                 <Dropdown.Item color={"primary"} onClick={() => deleteMessage(message.id)}>Supprimer</Dropdown.Item>
                                             </Dropdown.Menu>
@@ -82,6 +99,11 @@ export default function Messages({messages, userSessionData}) {
                     );
                 })
             }
-        </>
+            <div className={"flex justify-center m-5"}>
+                {
+                    messages.length < 10 ? <Button onClick={backUp} color={"secondary"} className={"w-1/3"}>Revenir au début</Button> : <Button onClick={loadMore} color={"secondary"} className={"w-1/3"}>Charger plus</Button>
+                }
+            </div>
+        </Suspense>
     );
 }

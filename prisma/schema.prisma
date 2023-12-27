@@ -36,16 +36,15 @@ model Session {
 }
 
 model User {
-  id            String     @id @default(cuid())
-  name          String?    @unique
-  email         String?    @unique
+  id            String    @id @default(cuid())
+  name          String?   @unique
+  email         String?   @unique
   emailVerified DateTime?
   image         String?
-  isPremium     Boolean    @default(false)
+  isPremium     Boolean   @default(false)
   accounts      Account[]
   sessions      Session[]
   messages      Message[]
-  responses     Response[]
 }
 
 model VerificationToken {
@@ -55,20 +54,11 @@ model VerificationToken {
 }
 
 model Message {
-  id         Int        @id @default(autoincrement())
-  content    String     @db.LongText
-  ownerId    String
-  owner      User       @relation(fields: [ownerId], references: [id])
-  responses  Response[]
-  created_at String
-}
-
-model Response {
   id             Int     @id @default(autoincrement())
   content        String  @db.LongText
-  messageOwnerId Int
-  message        Message @relation(fields: [messageOwnerId], references: [id])
   ownerId        String
   owner          User    @relation(fields: [ownerId], references: [id])
+  isResponse     Boolean
+  responseFromId Int?
   created_at     String
 }

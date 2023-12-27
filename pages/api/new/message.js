@@ -10,15 +10,16 @@ export default async function handle(req, res){
             }
         });
         if (userExist){
-            const date = new Date();
             const newMessage = await prisma.message.create({
                 data:{
                     content: body.messageContent,
                     ownerId: body.ownerId,
                     created_at: ((new Date().getTime())/1000).toFixed(0),
+                    isResponse: false,
+                    responseFromId: null,
                 }
             })
-            res.json(newMessage)
+            res.json(newMessage);
         }
         else{
             res.status(400).end();
