@@ -10,7 +10,7 @@ export default function PhoneDrawer({drawerVisible, toggleDrawer, userSessionDat
             <div className={"p-2 w-fit flex h-full bg-base-100"}>
                 <div className={"basis-1/4 flex w-full flex-col p-5"}>
                     <div className={"flex w-full h-1/2 justify-center"}>
-                        <MinakoTitle></MinakoTitle>
+                        <MinakoTitle/>
                     </div>
                     <LeftMenuButtons userSessionData={userSessionData} isDrawer={true}/>
                     <div className={"flex w-full justify-center items-end h-1/2"}>

@@ -15,8 +15,9 @@ export default function MinakoTitle() {
             delay: anime.stagger(400, {start: 5000}),
             duration: 400,
             loop: true
-        })
+        });
     }, []);
+    const minakoVersion = process.env.NEXT_PUBLIC_MINAKO_VERSION;
 
     return (
         <div className={"flex flex-col items-center"}>
@@ -29,7 +30,7 @@ export default function MinakoTitle() {
                     })
                 }
             </div>
-            <h2 class={"text-xs font-mono"}>Ver.</h2>
+            <h2 class={"text-xs font-mono text-neutral-content"}>Ver.{minakoVersion}</h2>
         </div>
     );
 }
