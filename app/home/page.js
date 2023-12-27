@@ -4,7 +4,6 @@ import {redirect} from "next/navigation";
 import MessagesList from "@/components/home/MessagesList";
 import LeftMenu from "@/components/main/LeftMenu";
 import {PrismaClient} from '@prisma/client';
-import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 const prisma = new PrismaClient();
 
 export default async function Home(){

@@ -1,7 +1,7 @@
 import "@/app/globals.css";
 
 export const metadata = {
-    title: "Minako",
+    title: "Minako - Acceuil",
     description: "Le réseau social Minako créé par Valentin Arnould",
     charset: "utf-8",
 }
