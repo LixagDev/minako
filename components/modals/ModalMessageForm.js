@@ -4,9 +4,9 @@ import {useState} from "react";
 import {useRouter} from "next/navigation";
 import axios from "axios";
 import TextareaAutosize from "react-textarea-autosize";
-import {Send} from "react-feather";
+import {Send, X} from "react-feather";
 
-export default function ModalMessageForm({userSessionData, modalMessageFormVisible, toggleModalMessageForm}){
+export default function ModalMessageForm({userSessionData, modalMessageFormVisible, toggleModalMessageForm, messageListDiv}){
     const [messageContent, setMessageContent] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
@@ -18,15 +18,19 @@ export default function ModalMessageForm({userSessionData, modalMessageFormVisib
             .then((response) => {
                 setIsLoading(false);
                 setMessageContent("");
-                router.refresh();
+                router.push("/home");
                 toggleModalMessageForm()
+                if (messageListDiv){
+                    messageListDiv.current.scrollTo({top: 0, behavior: 'smooth' });
+                }
+                router.refresh();
             });
     }
 
     return(
         <Modal.Legacy open={modalMessageFormVisible} onClickBackdrop={toggleModalMessageForm}>
             <Button size="sm" color="ghost" shape="circle" className="absolute right-2 top-2" onClick={toggleModalMessageForm}>
-                ✕
+                <X/>
             </Button>
             <Modal.Header className="font-bold">Poster un nouveau message</Modal.Header>
             <Modal.Body>

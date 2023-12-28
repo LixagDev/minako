@@ -4,6 +4,7 @@ import {useEffect} from "react";
 
 export default function WelcomeText({session}){
     const minakoArray = Array.from("Minako");
+
     useEffect(() => {
         anime({
             targets: ".anime-minako",

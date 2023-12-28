@@ -5,7 +5,7 @@ import {signOut} from "next-auth/react";
 
 export default function SessionUserProfil({userSessionData}){
     return(
-        <div class={"flex gap-3 items-center"}>
+        <div class={"flex gap-3 items-center p-5 rounded-xl bg-base-200"}>
             <Avatar border borderColor={"neutral"} shape={"circle"}
                     src={userSessionData.image}
                     size={"sm"}/>

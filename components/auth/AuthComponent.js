@@ -54,7 +54,8 @@ export default function AuthComponent({session, providers}){
                 <Button className={"text-white w-full anime-button"} onClick={onSignOut}>Ou se déconnecter</Button>
             </div>
         );
-    } else{
+    }
+    else{
         return (
             <div className={"w-80 flex flex-col justify-center"}>
                 <Button onClick={signInDiscord} className={"anime-button"}><Image src={DiscordImg} width={25} alt={providers.discord.name}/>Se connecter avec {providers.discord.name}</Button>

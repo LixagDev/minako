@@ -2,10 +2,6 @@
 module.exports = {
   daisyui: {
     themes: ["dracula"],
-    base: true,
-    styled: true,
-    utils: true,
-    prefix: "",
     themeRoot: ":root",
   },
   content: [

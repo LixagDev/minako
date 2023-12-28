@@ -1,7 +1,5 @@
 import {PrismaClient} from '@prisma/client'
 const prisma = new PrismaClient()
-import {Avatar} from "react-daisyui";
-import Image from "next/image";
 
 export default async function UserPage({params}){
     const username = params.username;
@@ -19,7 +17,8 @@ export default async function UserPage({params}){
                 <img height={100} width={100} className={"rounded-full"} src={userdata.image} alt=""/>
             </div>
         );
-    } else {
+    }
+    else {
         return(
             <h1>y'a rien frrr</h1>
         );

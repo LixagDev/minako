@@ -1,5 +1,5 @@
 "use client"
-import SessionUserProfil from "@/components/home/SessionUserProfil";
+import SessionUserProfil from "@/components/main/SessionUserProfil";
 import {Drawer} from "react-daisyui";
 import LeftMenuButtons from "@/components/main/LeftMenuButtons";
 import MinakoTitle from "@/components/main/MinakoTitle";

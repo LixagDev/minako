@@ -1,5 +1,5 @@
 "use client"
-import {Avatar, Input, Form, Button, Textarea, Loading} from "react-daisyui";
+import {Avatar, Form, Button} from "react-daisyui";
 import TextareaAutosize from "react-textarea-autosize";
 import {useState} from "react";
 import axios from "axios";
@@ -23,7 +23,7 @@ export default function MessageForm({userSessionData}){
     }
 
     return(
-        <div className={"bg-base-300 w-full p-3 md:flex justify-center hidden border-b border-neutral"}>
+        <div className={"bg-base-300 w-full p-4 md:flex justify-center hidden border-b border-neutral"}>
             <Form onSubmit={handleSubmit} className={"flex flex-col w-full gap-3"}>
                 <div className={"flex gap-3 h-full items-center"}>
                     <Avatar border borderColor={"neutral"} shape={"circle"}

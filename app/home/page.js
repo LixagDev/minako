@@ -1,14 +1,17 @@
 import {getServerSession} from "next-auth";
 import {authOptions} from "@/pages/api/auth/[...nextauth]";
 import {redirect} from "next/navigation";
-import MessagesList from "@/components/home/MessagesList";
+import MessagesList from "@/components/messages&responses/MessagesList";
 import LeftMenu from "@/components/main/LeftMenu";
+import RightMenu from "@/components/main/RightMenu";
+
 import {PrismaClient} from '@prisma/client';
 const prisma = new PrismaClient();
 
 export default async function Home({searchParams}){
-    const session = await getServerSession(authOptions)
+    const session = await getServerSession(authOptions);
     var skip = searchParams.skip;
+
     if(!session){
         redirect("/");
     }
@@ -25,6 +28,7 @@ export default async function Home({searchParams}){
                 name: session.user.name,
             }
         });
+
         const messages = await prisma.message.findMany({
             where:{
                 isResponse: false
@@ -51,10 +55,9 @@ export default async function Home({searchParams}){
                     <MessagesList userSessionData={userSessionData} messages={messages} skip={skip}/>
                 </div>
                 <div className={"basis-1/4 hidden md:flex"}>
-
+                    <RightMenu/>
                 </div>
             </div>
         );
     }
-
 }

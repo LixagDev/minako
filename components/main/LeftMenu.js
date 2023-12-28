@@ -1,8 +1,7 @@
 "use client"
 import MinakoTitle from "@/components/main/MinakoTitle";
-import SessionUserProfil from "@/components/home/SessionUserProfil";
+import SessionUserProfil from "@/components/main/SessionUserProfil";
 import LeftMenuButtons from "@/components/main/LeftMenuButtons";
-import {useState} from "react";
 
 export default function LeftMenu({userSessionData}){
     return (

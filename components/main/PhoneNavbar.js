@@ -19,7 +19,7 @@ export default function PhoneNavbar({userSessionData}){
                 <div className={"flex justify-center basis-1/3"}>
                     <MinakoTitle/>
                 </div>
-                <div className={"flex basis-1/3"}></div>
+                <div className={"flex basis-1/3 flex-row-reverse"}></div>
             </div>
         </>
     );

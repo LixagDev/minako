@@ -1,16 +1,19 @@
 "use client"
 import {Button} from "react-daisyui";
-import {User, Send, Star} from "react-feather";
+import {User, Send, Star, GitHub} from "react-feather";
 import {useRouter} from "next/navigation";
 import {useState} from "react";
-import ModalMessageForm from "@/components/main/modals/ModalMessageForm";
+import ModalMessageForm from "@/components/modals/ModalMessageForm";
 
 export default function LeftMenuButtons({userSessionData, isDrawer}){
     const router = useRouter();
+
     const buttons = [
         {name: "Profil", href: `/user/${userSessionData.name}`, icon: <User/>},
         {name: "Premium", href: "/premium", icon: <Star/>},
+        {name: "GitHub", href: "https://github.com/LixagDev/Minako", icon: <GitHub/>}
     ];
+
     const [modalMessageFormVisible, setModalMessageFormVisible] = useState(false);
     const toggleModalMessageForm = () => {
         setModalMessageFormVisible(!modalMessageFormVisible);

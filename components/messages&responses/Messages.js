@@ -5,37 +5,11 @@ import {MessageSquare, MoreVertical, Star} from "react-feather";
 import axios from "axios";
 import Markdown from "react-markdown";
 import {Suspense} from "react";
-import Loading from "@/app/loading"
+import LoadingMessagesSkeleton from "@/components/loadings/LoadingMessagesSkeleton";
+import DateChanger from "@/functions/DateChanger";
 
 export default function Messages({messages, userSessionData, skip, messageListDiv}) {
     const router = useRouter();
-    const dateChanger = (messageDate) => {
-        const today = ((new Date().getTime())/1000).toFixed(0);
-        const resultMessageDate = messageDate;
-        const minutesBetween = (today/60)-(resultMessageDate/60);
-        const hoursBetween = (today/3600)-(resultMessageDate/3600);
-        const secondsBetween = (today-resultMessageDate);
-        if (secondsBetween.toFixed(0) < 0){
-            const fullDate = new Date(Number(resultMessageDate)*1000);
-            return `${fullDate.getDate()}/${fullDate.getMonth()}/${fullDate.getFullYear()}`;
-        }
-        else if (secondsBetween.toFixed(0) <= 15){
-            return "À l'instant";
-        }
-        else if (minutesBetween.toFixed(1) < 1){
-            return `Il y a moins d'une minute`;
-        }
-        else if (minutesBetween.toFixed(0) < 60){
-            return `Il y a ${minutesBetween.toFixed(0)} min`;
-        }
-        else if (hoursBetween.toFixed(0) < 24){
-            return `Il y a ${hoursBetween.toFixed(0)}h`;
-        }
-        else{
-            const fullDate = new Date(Number(resultMessageDate)*1000);
-            return `${fullDate.getDate()}/${fullDate.getMonth()}/${fullDate.getFullYear()}`;
-        }
-    }
 
     const getResponse = (messageId) => {
         return axios.get(`/api/get/message?id=${messageId}`)
@@ -62,11 +36,11 @@ export default function Messages({messages, userSessionData, skip, messageListDi
     }
 
     return (
-        <Suspense fallback={<Loading/>}>
+        <Suspense fallback={<LoadingMessagesSkeleton/>}>
             {
                 messages.map((message) => {
                     return (
-                        <div key={message.id} className={"w-full bg-base-200 border-b border-neutral flex gap-3 p-4 cursor-pointer"} onClick={() => router.push(`/message/${message.id}`)}>
+                        <div key={message.id} className={"w-full bg-base-200 border-b border-neutral flex gap-3 p-4"}>
                             <Avatar onClick={() => router.push(`/user/${message.owner.name}`)} className={"cursor-pointer"} shape={"circle"}
                                     src={message.owner.image} border borderColor={"neutral"}
                                     size={"sm"}/>
@@ -75,11 +49,11 @@ export default function Messages({messages, userSessionData, skip, messageListDi
                                     <Link onClick={() => router.push(`/user/${message.owner.name}`)}
                                           className={"font-bold"}>@{message.owner.name} </Link>
                                     {message.owner.isPremium ? <Star width={15} strokeWidth={4}/> : null}
-                                    <h3 className={"text-xs"} suppressHydrationWarning>{dateChanger(message.created_at)}</h3>
+                                    <h3 className={"text-xs"}>{DateChanger(message.created_at)}</h3>
                                 </div>
-                                <h3><Markdown className={"whitespace-break-spaces"}>{message.content}</Markdown></h3>
+                                <h3 className={"cursor-pointer"} onClick={() => router.push(`/message/${message.id}`)}><Markdown className={"whitespace-break-spaces"}>{message.content}</Markdown></h3>
                                 <div className={"flex gap-1 items-center"}>
-                                    <h4 className={"text-sm"} suppressHydrationWarning>{getResponse(message.id)}</h4>
+                                    <h4 className={"text-sm"}>{getResponse(message.id)}</h4>
                                     <MessageSquare size={15}/>
                                 </div>
                             </div>
