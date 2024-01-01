@@ -6,7 +6,7 @@ import axios from "axios";
 import Markdown from "react-markdown";
 import {Suspense} from "react";
 import LoadingMessagesSkeleton from "@/components/loadings/LoadingMessagesSkeleton";
-import DateChanger from "@/functions/DateChanger";
+import DateChangerMessage from "@/functions/DateChangerMessage";
 
 export default function Responses({responses, userSessionData, skip, responseListDiv, messageParent}) {
     const router = useRouter();
@@ -48,7 +48,7 @@ export default function Responses({responses, userSessionData, skip, responseLis
                                     <Link onClick={() => router.push(`/user/${response.owner.name}`)}
                                           className={"font-bold"}>@{response.owner.name} </Link>
                                     {response.owner.isPremium ? <Star width={15} strokeWidth={4}/> : null}
-                                    <h3 className={"text-xs"}>{DateChanger(response.created_at)}</h3>
+                                    <h3 className={"text-xs"}>{DateChangerMessage(response.created_at)}</h3>
                                 </div>
                                 <h3 className={"cursor-pointer"} onClick={() => router.push(`/message/${response.id}`)}><Markdown className={"whitespace-break-spaces"}>{response.content}</Markdown></h3>
                                 <div className={"flex gap-1 items-center"}>

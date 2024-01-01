@@ -9,9 +9,9 @@ export default function LeftMenuButtons({userSessionData, isDrawer}){
     const router = useRouter();
 
     const buttons = [
-        {name: "Profil", href: `/user/${userSessionData.name}`, icon: <User/>},
-        {name: "Premium", href: "/premium", icon: <Star/>},
-        {name: "GitHub", href: "https://github.com/LixagDev/Minako", icon: <GitHub/>}
+        {name: "Profil", href: `/user/${userSessionData.name}`, icon: <User/>, disabled: false},
+        {name: "Premium", href: "/premium", icon: <Star/>, disabled: true},
+        {name: "GitHub", href: "https://github.com/LixagDev/Minako", icon: <GitHub/>, disabled: false}
     ];
 
     const [modalMessageFormVisible, setModalMessageFormVisible] = useState(false);
@@ -27,7 +27,7 @@ export default function LeftMenuButtons({userSessionData, isDrawer}){
                     buttons.map((button) => {
                         return (
                             <Button className={"w-full"}
-                                    onClick={() => router.push(button.href)}>{button.icon}{button.name}</Button>
+                                    onClick={() => router.push(button.href)} disabled={button.disabled}>{button.icon}{button.name}</Button>
                         );
                     })
                 }

@@ -6,7 +6,7 @@ import axios from "axios";
 import Markdown from "react-markdown";
 import {Suspense} from "react";
 import LoadingMessagesSkeleton from "@/components/loadings/LoadingMessagesSkeleton";
-import DateChanger from "@/functions/DateChanger";
+import DateChangerMessage from "@/functions/DateChangerMessage";
 
 export default function Messages({messages, userSessionData, skip, messageListDiv}) {
     const router = useRouter();
@@ -26,12 +26,12 @@ export default function Messages({messages, userSessionData, skip, messageListDi
     }
 
     const loadMore = () => {
-        router.push(`/home?skip=${Number(skip)+10}`);
+        router.push(`?skip=${Number(skip)+10}`);
         messageListDiv.current.scrollTo({top: 0, behavior: 'smooth' });
     }
 
     const backUp = () => {
-        router.push("/home");
+        router.push("?");
         messageListDiv.current.scrollTo({top: 0, behavior: 'smooth' });
     }
 
@@ -49,7 +49,7 @@ export default function Messages({messages, userSessionData, skip, messageListDi
                                     <Link onClick={() => router.push(`/user/${message.owner.name}`)}
                                           className={"font-bold"}>@{message.owner.name} </Link>
                                     {message.owner.isPremium ? <Star width={15} strokeWidth={4}/> : null}
-                                    <h3 className={"text-xs"}>{DateChanger(message.created_at)}</h3>
+                                    <h3 className={"text-xs"}>{DateChangerMessage(message.created_at)}</h3>
                                 </div>
                                 <h3 className={"cursor-pointer"} onClick={() => router.push(`/message/${message.id}`)}><Markdown className={"whitespace-break-spaces"}>{message.content}</Markdown></h3>
                                 <div className={"flex gap-1 items-center"}>

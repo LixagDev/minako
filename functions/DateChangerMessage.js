@@ -1,4 +1,4 @@
-export default function DateChanger(date){
+export default function DateChangerMessage(date){
     const today = ((new Date().getTime())/1000).toFixed(0);
     const resultMessageDate = date;
     const minutesBetween = (today/60)-(resultMessageDate/60);

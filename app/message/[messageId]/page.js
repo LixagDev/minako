@@ -3,10 +3,8 @@ import RightMenu from "@/components/main/RightMenu";
 import {getServerSession} from "next-auth";
 import {authOptions} from "@/pages/api/auth/[...nextauth]";
 import {redirect} from "next/navigation";
-const ResponsesList = dynamic(() => import("@/components/messages&responses/ResponsesList"), { ssr: false });
-
+import ResponsesList from "@/components/messages&responses/ResponsesList";
 import {PrismaClient} from '@prisma/client';
-import dynamic from "next/dynamic";
 const prisma = new PrismaClient();
 
 export default async function MessagePage({params, searchParams}){

@@ -7,6 +7,7 @@ import {getProviders} from "next-auth/react";
 export default async function Welcome(){
     const session = await getServerSession(authOptions);
     const providers = await getProviders();
+    console.log(session)
 
     return (
         <div className={"h-full"}>

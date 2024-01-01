@@ -1,8 +1,10 @@
 "use client"
 import anime from "animejs";
 import {useEffect} from "react";
+import {useRouter} from "next/navigation";
 
 export default function MinakoTitle() {
+    const router = useRouter();
     const minakoArray = Array.from("Minako");
 
     useEffect(() => {
@@ -17,7 +19,7 @@ export default function MinakoTitle() {
             loop: true
         });
     }, []);
-    const minakoVersion = "28.12.23";
+    const minakoVersion = "0.0.3";
 
     return (
         <div className={"flex flex-col items-center"}>
@@ -25,7 +27,9 @@ export default function MinakoTitle() {
                 {
                     minakoArray.map((letter) => {
                         return(
-                            <h1 className={"lg:text-6xl text-4xl font-black anime-minako"}>{letter}</h1>
+                            <div onClick={() => router.push("/home")} className={"cursor-pointer"}>
+                                <h1 className={"lg:text-6xl text-4xl font-black anime-minako"}>{letter}</h1>
+                            </div>
                         );
                     })
                 }

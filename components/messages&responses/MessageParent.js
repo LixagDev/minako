@@ -1,11 +1,11 @@
 "use client"
-import DateChanger from "@/functions/DateChanger";
+import DateChangerMessage from "@/functions/DateChangerMessage";
 import {Avatar, Dropdown, Link} from "react-daisyui";
 import {MoreVertical, Star, ArrowLeft} from "react-feather";
 import Markdown from "react-markdown";
 import {useRouter} from "next/navigation";
 import axios from "axios";
-import {Button} from "react-daisyui";
+import BackBar from "@/components/main/BackBar";
 
 export default function MessageParent({messageParent, userSessionData}){
     const router = useRouter();
@@ -19,10 +19,7 @@ export default function MessageParent({messageParent, userSessionData}){
 
     return(
         <div className={"flex flex-col"}>
-            <div className={"flex gap-3 border-b border-t md:border-t-0 border-neutral p-4 items-center bg-base-300"}>
-                <Button  color={"secondary"} onClick={() => router.back()}><ArrowLeft size={25}/></Button>
-                <h2 className={"font-bold text-lg"}>Message de {messageParent.owner.name}</h2>
-            </div>
+            <BackBar content={`Messsage de ${messageParent.owner.name}`}/>
             <div className={"w-full bg-base-300 border-b border-neutral flex gap-3 p-4"}>
                 <Avatar onClick={() => router.push(`/user/${messageParent.owner.name}`)} className={"cursor-pointer"}
                         shape={"circle"}
@@ -33,7 +30,7 @@ export default function MessageParent({messageParent, userSessionData}){
                         <Link onClick={() => router.push(`/user/${messageParent.owner.name}`)}
                               className={"font-bold text-xl"}>@{messageParent.owner.name} </Link>
                         {messageParent.owner.isPremium ? <Star width={15} strokeWidth={4}/> : null}
-                        <h3 className={"text-xs"}>{DateChanger(messageParent.created_at)}</h3>
+                        <h3 className={"text-xs"}>{DateChangerMessage(messageParent.created_at)}</h3>
                     </div>
                     <h3 className={"cursor-pointer text-lg"} onClick={() => router.push(`/message/${messageParent.id}`)}>
                         <Markdown
