@@ -22,6 +22,6 @@ export default function DateChangerMessage(date){
     }
     else{
         const fullDate = new Date(Number(resultMessageDate)*1000);
-        return `${fullDate.getDate()}/${fullDate.getMonth()}/${fullDate.getFullYear()}`;
+        return `${fullDate.getDate()}/${fullDate.getMonth()+1}/${fullDate.getFullYear()}`;
     }
 }

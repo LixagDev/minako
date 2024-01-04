@@ -28,9 +28,9 @@ export default async function UserPage({params, searchParams}){
             select:{
                 id: true,
                 name: true,
+                othername: true,
                 image: true,
                 isPremium: true,
-                banner: true,
                 about: true,
                 created_at: true,
                 messages:{
@@ -44,6 +44,7 @@ export default async function UserPage({params, searchParams}){
                         created_at: true,
                         isResponse: true,
                         ownerId: true,
+                        responseFromId: true,
                     },
                     skip: skip,
                     take: 10,
@@ -51,30 +52,45 @@ export default async function UserPage({params, searchParams}){
             }
         });
 
-        const userSessionData = await prisma.user.findUnique({
-            where:{
-                name: session.user.name,
-            }
-        });
+        if (userRequestData){
+            const userRequestResponses = await prisma.message.findMany({
+                where:{
+                    ownerId: userRequestData.id,
+                    isResponse: true,
+                },
+                select:{
+                    id: true,
+                    ownerId: true,
+                    owner: true,
+                    content: true,
+                    responseFromId: true,
+                    created_at: true,
+                }
+            });
 
-        return(
-            <div className={"flex justify-center h-full"}>
-                <div className={"basis-1/4 hidden md:flex flex-col p-5"}>
-                    <LeftMenu userSessionData={userSessionData}/>
+            const userSessionData = await prisma.user.findUnique({
+                where:{
+                    name: session.user.name,
+                }
+            });
+
+            return(
+                <div className={"flex justify-center h-full"}>
+                    <div className={"basis-1/4 hidden md:flex flex-col p-5"}>
+                        <LeftMenu userSessionData={userSessionData}/>
+                    </div>
+                    <div className={"w-full md:basis-1/2"}>
+                        <UserProfile userRequestData={userRequestData} userSessionData={userSessionData} userRequestResponse={userRequestResponses} skip={skip}/>
+                    </div>
+                    <div className={"basis-1/4 hidden md:flex"}>
+                        <RightMenu/>
+                    </div>
                 </div>
-                <div className={"w-full md:basis-1/2"}>
-                    {
-                        userRequestData ?
-                            <UserProfile userRequestData={userRequestData} userSessionData={userSessionData} skip={skip}/>
-                        :
-                        <h1>tu sais pas écrire frérot ouuuu c'est que pour les enfants de moins de 10 ans ?</h1>
-                    }
-                </div>
-                <div className={"basis-1/4 hidden md:flex"}>
-                    <RightMenu/>
-                </div>
-            </div>
-        );
+            );
+        }
+        else{
+            redirect("/home");
+        }
     }
     else{
         redirect("/");

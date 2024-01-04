@@ -1,11 +1,12 @@
 "use client"
 import DateChangerMessage from "@/functions/DateChangerMessage";
 import {Avatar, Dropdown, Link} from "react-daisyui";
-import {MoreVertical, Star, ArrowLeft} from "react-feather";
+import {MoreVertical} from "react-feather";
 import Markdown from "react-markdown";
 import {useRouter} from "next/navigation";
 import axios from "axios";
 import BackBar from "@/components/main/BackBar";
+import PremiumBadge from "@/components/main/PremiumBadge";
 
 export default function MessageParent({messageParent, userSessionData}){
     const router = useRouter();
@@ -27,9 +28,15 @@ export default function MessageParent({messageParent, userSessionData}){
                         size={"sm"}/>
                 <div className={"flex flex-col justify-center w-fit basis-full"}>
                     <div className={"flex gap-2 items-center"}>
-                        <Link onClick={() => router.push(`/user/${messageParent.owner.name}`)}
-                              className={"font-bold text-xl"}>@{messageParent.owner.name} </Link>
-                        {messageParent.owner.isPremium ? <Star width={15} strokeWidth={4}/> : null}
+                        {
+                            messageParent.owner.othername ?
+                                <>
+                                    <Link onClick={() => router.push(`/user/${messageParent.owner.name}`)} className={"font-bold"}>{messageParent.owner.othername} </Link>
+                                    <Link onClick={() => router.push(`/user/${messageParent.owner.name}`)} className={"font-bold text-neutral-content"}>@{messageParent.owner.name} </Link>
+                                </>
+                                : <Link onClick={() => router.push(`/user/${messageParent.owner.name}`)} className={"font-bold"}>@{messageParent.owner.name} </Link>
+                        }
+                        {messageParent.owner.isPremium ? <PremiumBadge mini={true} size={"sm"} username={messageParent.owner.name}/> : null}
                         <h3 className={"text-xs"}>{DateChangerMessage(messageParent.created_at)}</h3>
                     </div>
                     <h3 className={"cursor-pointer text-lg"} onClick={() => router.push(`/message/${messageParent.id}`)}>

@@ -4,7 +4,9 @@ import LoadingResponsesListSkeleton  from "@/components/loadings/LoadingResponse
 import {Suspense, useRef} from "react";
 import PhoneNavbar from "@/components/main/PhoneNavbar";
 import ResponseForm from "@/components/forms/ResponseForm";
-import Responses from "@/components/messages&responses/Responses";
+import dynamic from "next/dynamic";
+const Messages = dynamic(() => import("@/components/messages&responses/Messages"), { ssr: false });
+
 
 export default function ResponsesList({messageParent, responses, userSessionData, skip}){
     const responseListDiv = useRef();
@@ -12,9 +14,9 @@ export default function ResponsesList({messageParent, responses, userSessionData
         <div ref={responseListDiv} className={"bg-base-200 w-full overflow-x-hidden overflow-y-scroll h-full border-l border-r border-neutral"}>
             <PhoneNavbar userSessionData={userSessionData}/>
             <MessageParent messageParent={messageParent} userSessionData={userSessionData}/>
+            <ResponseForm userSessionData={userSessionData} messageParent={messageParent}/>
             <Suspense fallback={<LoadingResponsesListSkeleton/>}>
-                <ResponseForm userSessionData={userSessionData} messageParent={messageParent}/>
-                <Responses messageParent={messageParent} userSessionData={userSessionData} responses={responses} skip={skip} responseListDiv={responseListDiv}></Responses>
+                <Messages messageParent={messageParent} userSessionData={userSessionData} messages={responses} skip={skip} messageListDiv={responseListDiv}></Messages>
             </Suspense>
         </div>
     );

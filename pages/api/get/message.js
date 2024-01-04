@@ -1,5 +1,5 @@
-import {PrismaClient} from '@prisma/client'
-const prisma = new PrismaClient()
+import {PrismaClient} from '@prisma/client';
+const prisma = new PrismaClient();
 
 export default async function handle(req, res){
     if (req.method === "GET"){
@@ -11,8 +11,10 @@ export default async function handle(req, res){
                         id: Number(messageId),
                     },
                     select:{
+                        id: true,
                         owner: true,
                         content: true,
+                        created_at: true,
                     }
                 });
                 if (message){
@@ -21,7 +23,7 @@ export default async function handle(req, res){
                             responseFromId: Number(messageId),
                         }
                     });
-                    res.json({ownerName: message.owner.name, messageContent: message.content, responses: responses.length})
+                    res.json({owner: message.owner, id: message.id, messageContent: message.content, responses: responses.length, created_at: message.created_at})
                 }
                 else{
                     res.json("Message introuvable.");

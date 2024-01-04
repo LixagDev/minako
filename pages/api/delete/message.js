@@ -23,11 +23,6 @@ export default async function handle(req, res){
                         id: body.messageId,
                     }
                 });
-                const deleteResponse = await prisma.message.deleteMany({
-                    where:{
-                        responseFromId: body.messageId,
-                    }
-                });
                 res.json(deleteMessage);
             }
             else{

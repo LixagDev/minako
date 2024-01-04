@@ -1,20 +1,20 @@
-"use client"
 import {Avatar, Button, Dropdown, Link} from "react-daisyui";
 import {useRouter} from "next/navigation";
-import {MessageSquare, MoreVertical, Star} from "react-feather";
+import {MessageSquare, MoreVertical} from "react-feather";
 import axios from "axios";
 import Markdown from "react-markdown";
 import {Suspense} from "react";
 import LoadingMessagesSkeleton from "@/components/loadings/LoadingMessagesSkeleton";
 import DateChangerMessage from "@/functions/DateChangerMessage";
+import PremiumBadge from "@/components/main/PremiumBadge";
 
 export default function Messages({messages, userSessionData, skip, messageListDiv}) {
     const router = useRouter();
 
-    const getResponse = (messageId) => {
+    const getMessageDataFromApi = (messageId) => {
         return axios.get(`/api/get/message?id=${messageId}`)
             .then((response) => {
-                return response.data.responses;
+                return response.data;
             });
     }
 
@@ -38,7 +38,8 @@ export default function Messages({messages, userSessionData, skip, messageListDi
     return (
         <Suspense fallback={<LoadingMessagesSkeleton/>}>
             {
-                messages.map((message) => {
+                messages.map(async (message) => {
+                    const messageData = await getMessageDataFromApi(message.id);
                     return (
                         <div key={message.id} className={"w-full bg-base-200 border-b border-neutral flex gap-3 p-4"}>
                             <Avatar onClick={() => router.push(`/user/${message.owner.name}`)} className={"cursor-pointer"} shape={"circle"}
@@ -46,14 +47,20 @@ export default function Messages({messages, userSessionData, skip, messageListDi
                                     size={"sm"}/>
                             <div className={"flex flex-col justify-center w-fit basis-full"}>
                                 <div className={"flex gap-2 items-center"}>
-                                    <Link onClick={() => router.push(`/user/${message.owner.name}`)}
-                                          className={"font-bold"}>@{message.owner.name} </Link>
-                                    {message.owner.isPremium ? <Star width={15} strokeWidth={4}/> : null}
+                                    {
+                                        message.owner.othername ?
+                                            <>
+                                                <Link onClick={() => router.push(`/user/${message.owner.name}`)} className={"font-bold"}>{message.owner.othername} </Link>
+                                                <Link onClick={() => router.push(`/user/${message.owner.name}`)} className={"font-bold text-neutral-content"}>@{message.owner.name} </Link>
+                                            </>
+                                            : <Link onClick={() => router.push(`/user/${message.owner.name}`)} className={"font-bold"}>@{message.owner.name} </Link>
+                                    }
+                                    {message.owner.isPremium ? <PremiumBadge mini={true} size={"sm"} username={message.owner.name} /> : null}
                                     <h3 className={"text-xs"}>{DateChangerMessage(message.created_at)}</h3>
                                 </div>
                                 <h3 className={"cursor-pointer"} onClick={() => router.push(`/message/${message.id}`)}><Markdown className={"whitespace-break-spaces"}>{message.content}</Markdown></h3>
                                 <div className={"flex gap-1 items-center"}>
-                                    <h4 className={"text-sm"}>{getResponse(message.id)}</h4>
+                                    <h4 className={"text-sm"}>{messageData.responses}</h4>
                                     <MessageSquare size={15}/>
                                 </div>
                             </div>
