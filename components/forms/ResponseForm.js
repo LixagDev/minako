@@ -32,7 +32,7 @@ export default function ResponseForm({userSessionData, messageParent}){
                     <TextareaAutosize placeholder={`Que voulez vous répondre à ${messageParent.owner.name} ?`} className={"input w-full h-fit resize-none p-3"} required disabled={isLoading} value={responseContent} onChange={(e) => setResponseContent(e.target.value)}></TextareaAutosize>
                 </div>
                 <div className={"w-full flex justify-center"}>
-                    <Button className={"w-fit"} color={"secondary"} loading={isLoading} disabled={isLoading} size={"md"}><Send/>Répondre</Button>
+                    <Button className={"w-fit"} color={"primary"} loading={isLoading} disabled={isLoading} size={"md"}><Send/>Répondre</Button>
                 </div>
             </Form>
         </div>

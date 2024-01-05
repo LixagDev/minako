@@ -39,7 +39,7 @@ export default function UserInfo({userRequestData, userSessionData}){
                                             {userRequestData.isPremium ?
                                                 <PremiumBadge size={"md"} username={userRequestData.name}/> : null}
                                         </div>
-                                        <h2 className={"font-bold lg:text-2xl text-2xl text-neutral-content"}>@{userRequestData.name}</h2>
+                                        <h2 className={"font-bold lg:text-2xl text-2xl text-neutral"}>@{userRequestData.name}</h2>
                                     </div>
                                     :
                                     <div className={"flex items-center gap-2"}>
@@ -49,7 +49,7 @@ export default function UserInfo({userRequestData, userSessionData}){
                                     </div>
                             }
                         </div>
-                        <h3 className={"text-neutral-content lg:text-base text-sm"}>À rejoint Minako
+                        <h3 className={"text-neutral lg:text-base text-sm"}>À rejoint Minako
                             le {DateChangerProfil(userRequestData.created_at)}</h3>
                     </div>
                 </div>
@@ -62,7 +62,7 @@ export default function UserInfo({userRequestData, userSessionData}){
                 }
                 {
                     userSessionData.name === userRequestData.name ?
-                        <Button color={"secondary"} onClick={toggleModalEditProfileVisible}><Edit/>Éditer le profil</Button>
+                        <Button color={"primary"} onClick={toggleModalEditProfileVisible}><Edit/>Éditer le profil</Button>
                         : null
                 }
             </div>

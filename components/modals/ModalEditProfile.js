@@ -15,7 +15,6 @@ export default function ModalEditProfile({userSessionData, modalEditProfileVisib
         setIsLoading(true);
         axios.post("/api/edit/profile", {othername: othername, about: about, userId: userSessionData.id})
             .then((response) => {
-                console.log(response.data);
                 setIsLoading(false);
                 toggleModalEditProfileVisible();
                 router.refresh();
@@ -34,7 +33,7 @@ export default function ModalEditProfile({userSessionData, modalEditProfileVisib
                     </div>
                     <div className={"flex flex-col w-full"}>
                         <h2>Bio</h2>
-                        <TextareaAutosize disabled={isLoading} placeholder={"Est ce que pour vous, tout est bon ?"} maxLength={100}
+                        <TextareaAutosize disabled={isLoading} placeholder={"Une petite bio ?"} maxLength={100}
                                           className={"input input-bordered w-full h-fit resize-none p-3 whitespace-break-spaces text-center"}
                                           value={about} onChange={(e) => setAbout(e.target.value)}></TextareaAutosize>
                     </div>
@@ -42,7 +41,7 @@ export default function ModalEditProfile({userSessionData, modalEditProfileVisib
             </Modal.Body>
             <Modal.Actions>
                 <Button onClick={toggleModalEditProfileVisible} disabled={isLoading}>Fermer</Button>
-                <Button color={"secondary"} disabled={isLoading} loading={isLoading} onClick={saveProfil}>Enregistrer</Button>
+                <Button color={"primary"} disabled={isLoading} loading={isLoading} onClick={saveProfil}>Enregistrer</Button>
             </Modal.Actions>
         </Modal.Legacy>
     );

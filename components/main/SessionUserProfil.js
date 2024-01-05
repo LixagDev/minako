@@ -15,7 +15,7 @@ export default function SessionUserProfil({userSessionData}){
                             <Link href={`/user/${userSessionData.name}`} className={"font-bold text-lg"}>{userSessionData.othername}</Link>
                             { userSessionData.isPremium ? <PremiumBadge mini={true} size={"sm"} username={userSessionData.name}/> : null}
                         </div>
-                        <Link href={`/user/${userSessionData.name}`} className={"font-bold text-md text-neutral-content"}>@{userSessionData.name}</Link>
+                        <Link href={`/user/${userSessionData.name}`} className={"font-bold text-md text-neutral"}>@{userSessionData.name}</Link>
                     </div>
                     :
                     <div className={"flex gap-1 items-center"}>
@@ -23,7 +23,7 @@ export default function SessionUserProfil({userSessionData}){
                         { userSessionData.isPremium ? <PremiumBadge mini={true} size={"sm"} username={userSessionData.name}/> : null}
                     </div>
             }
-            <Button onClick={() => signOut()} size={"sm"}><LogOut width={17}/></Button>
+            <Button onClick={() => signOut()} size={"sm"} className={"shadow-none"}><LogOut width={17}/></Button>
         </div>
     );
 }

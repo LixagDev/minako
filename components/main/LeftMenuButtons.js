@@ -31,7 +31,7 @@ export default function LeftMenuButtons({userSessionData, isDrawer}){
                         );
                     })
                 }
-                {!isDrawer ? <Button className={"w-full"} color={"secondary"} onClick={() => toggleModalMessageForm()}><Send/>Poster</Button> : null}
+                {!isDrawer ? <Button className={"w-full"} color={"primary"} onClick={() => toggleModalMessageForm()}><Send/>Poster</Button> : null}
             </div>
         </>
     );

@@ -7,39 +7,17 @@ import {Suspense} from "react";
 import LoadingMessagesSkeleton from "@/components/loadings/LoadingMessagesSkeleton";
 import DateChangerMessage from "@/functions/DateChangerMessage";
 import PremiumBadge from "@/components/main/PremiumBadge";
+import DeleteMessage from "@/functions/DeleteMessage";
+import GetMessageDataFromApi from "@/functions/GetMessageDataFromApi";
 
 export default function Messages({messages, userSessionData, skip, messageListDiv}) {
     const router = useRouter();
-
-    const getMessageDataFromApi = (messageId) => {
-        return axios.get(`/api/get/message?id=${messageId}`)
-            .then((response) => {
-                return response.data;
-            });
-    }
-
-    const deleteMessage = (messageId) => {
-        axios.post("/api/delete/message", {messageId: messageId, ownerId: userSessionData.id})
-            .then((response) => {
-                router.refresh();
-            });
-    }
-
-    const loadMore = () => {
-        router.push(`?skip=${Number(skip)+10}`);
-        messageListDiv.current.scrollTo({top: 0, behavior: 'smooth' });
-    }
-
-    const backUp = () => {
-        router.push("?");
-        messageListDiv.current.scrollTo({top: 0, behavior: 'smooth' });
-    }
 
     return (
         <Suspense fallback={<LoadingMessagesSkeleton/>}>
             {
                 messages.map(async (message) => {
-                    const messageData = await getMessageDataFromApi(message.id);
+                    const messageData = await GetMessageDataFromApi(message.id);
                     return (
                         <div key={message.id} className={"w-full bg-base-200 border-b border-neutral flex gap-3 p-4"}>
                             <Avatar onClick={() => router.push(`/user/${message.owner.name}`)} className={"cursor-pointer"} shape={"circle"}
@@ -51,7 +29,7 @@ export default function Messages({messages, userSessionData, skip, messageListDi
                                         message.owner.othername ?
                                             <>
                                                 <Link onClick={() => router.push(`/user/${message.owner.name}`)} className={"font-bold"}>{message.owner.othername} </Link>
-                                                <Link onClick={() => router.push(`/user/${message.owner.name}`)} className={"font-bold text-neutral-content"}>@{message.owner.name} </Link>
+                                                <Link onClick={() => router.push(`/user/${message.owner.name}`)} className={"font-bold text-neutral"}>@{message.owner.name} </Link>
                                             </>
                                             : <Link onClick={() => router.push(`/user/${message.owner.name}`)} className={"font-bold"}>@{message.owner.name} </Link>
                                     }
@@ -70,7 +48,7 @@ export default function Messages({messages, userSessionData, skip, messageListDi
                                         <Dropdown horizontal={"left"}>
                                             <Dropdown.Toggle size={"sm"}><MoreVertical /></Dropdown.Toggle>
                                             <Dropdown.Menu className="w-52">
-                                                <Dropdown.Item color={"primary"} onClick={() => deleteMessage(message.id)}>Supprimer</Dropdown.Item>
+                                                <Dropdown.Item color={"primary"} onClick={() => DeleteMessage(message.id, userSessionData).then(response => {router.refresh();})}>Supprimer</Dropdown.Item>
                                             </Dropdown.Menu>
                                         </Dropdown>
                                         : null
@@ -80,11 +58,6 @@ export default function Messages({messages, userSessionData, skip, messageListDi
                     );
                 })
             }
-            <div className={"flex justify-center m-5"}>
-                {
-                    messages.length < 10 ? <Button onClick={backUp} color={"secondary"} className={"w-1/3"}>Revenir au début</Button> : <Button onClick={loadMore} color={"secondary"} className={"w-1/3"}>Charger plus</Button>
-                }
-            </div>
         </Suspense>
     );
 }

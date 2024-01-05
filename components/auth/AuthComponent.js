@@ -51,7 +51,7 @@ export default function AuthComponent({session, providers}){
             <div class={"w-80 flex flex-col justify-center gap-2"}>
                 <h1 class={"text-center"}>Vous êtes déjà connecté !</h1>
                 <Button onMouseEnter={enterOnHover} onMouseLeave={enterOnLeave} className={"bg-gradient-to-r from-primary via-secondary to-accent text-white w-full anime-button-enter"} onClick={() => router.push("/home")}>Accéder à Minako</Button>
-                <Button className={"text-white w-full anime-button"} onClick={onSignOut}>Ou se déconnecter</Button>
+                <Button className={"w-full anime-button"} onClick={onSignOut}>Ou se déconnecter</Button>
             </div>
         );
     }

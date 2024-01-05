@@ -48,13 +48,13 @@ export default async function Home({searchParams}){
 
         return(
             <div className={"flex justify-center h-full"}>
-                <div className={"basis-1/4 hidden md:flex flex-col p-5"}>
+                <div className={"basis-1/4 hidden lg:flex flex-col p-5"}>
                     <LeftMenu userSessionData={userSessionData}/>
                 </div>
-                <div className={"w-full md:basis-1/2"}>
+                <div className={"w-full lg:basis-1/2"}>
                     <MessagesList userSessionData={userSessionData} messages={messages} skip={skip}/>
                 </div>
-                <div className={"basis-1/4 hidden md:flex"}>
+                <div className={"basis-1/4 hidden lg:flex"}>
                     <RightMenu/>
                 </div>
             </div>

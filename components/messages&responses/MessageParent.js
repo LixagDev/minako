@@ -20,7 +20,6 @@ export default function MessageParent({messageParent, userSessionData}){
 
     return(
         <div className={"flex flex-col"}>
-            <BackBar content={`Messsage de ${messageParent.owner.name}`}/>
             <div className={"w-full bg-base-300 border-b border-neutral flex gap-3 p-4"}>
                 <Avatar onClick={() => router.push(`/user/${messageParent.owner.name}`)} className={"cursor-pointer"}
                         shape={"circle"}
@@ -31,17 +30,16 @@ export default function MessageParent({messageParent, userSessionData}){
                         {
                             messageParent.owner.othername ?
                                 <>
-                                    <Link onClick={() => router.push(`/user/${messageParent.owner.name}`)} className={"font-bold"}>{messageParent.owner.othername} </Link>
-                                    <Link onClick={() => router.push(`/user/${messageParent.owner.name}`)} className={"font-bold text-neutral-content"}>@{messageParent.owner.name} </Link>
+                                    <Link onClick={() => router.push(`/user/${messageParent.owner.name}`)} className={"font-bold text-lg"}>{messageParent.owner.othername} </Link>
+                                    <Link onClick={() => router.push(`/user/${messageParent.owner.name}`)} className={"font-bold text-neutral text-lg"}>@{messageParent.owner.name} </Link>
                                 </>
-                                : <Link onClick={() => router.push(`/user/${messageParent.owner.name}`)} className={"font-bold"}>@{messageParent.owner.name} </Link>
+                                : <Link onClick={() => router.push(`/user/${messageParent.owner.name}`)} className={"font-bold text-lg"}>@{messageParent.owner.name} </Link>
                         }
                         {messageParent.owner.isPremium ? <PremiumBadge mini={true} size={"sm"} username={messageParent.owner.name}/> : null}
                         <h3 className={"text-xs"}>{DateChangerMessage(messageParent.created_at)}</h3>
                     </div>
                     <h3 className={"cursor-pointer text-lg"} onClick={() => router.push(`/message/${messageParent.id}`)}>
-                        <Markdown
-                            className={"whitespace-break-spaces"}>{messageParent.content}</Markdown></h3>
+                        <Markdown className={"whitespace-break-spaces"}>{messageParent.content}</Markdown></h3>
                 </div>
                 <div className={"flex items-center flex-row-reverse "}>
                     {

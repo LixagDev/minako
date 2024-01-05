@@ -19,7 +19,7 @@ export default function MinakoTitle() {
             loop: true
         });
     }, []);
-    const minakoVersion = "0.0.4";
+    const minakoVersion = "0.0.5";
 
     return (
         <div className={"flex flex-col items-center"}>
@@ -34,7 +34,7 @@ export default function MinakoTitle() {
                     })
                 }
             </div>
-            <h2 class={"text-xs font-mono text-neutral-content"}>Alpha {minakoVersion}</h2>
+            <h2 class={"text-xs font-mono text-neutral"}>Alpha {minakoVersion}</h2>
         </div>
     );
 }

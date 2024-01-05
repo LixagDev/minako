@@ -11,8 +11,8 @@ export default function PhoneMessageFormButton({userSessionData, messageListDiv}
     }
 
     return(
-        <div className={"absolute bottom-3 right-3 md:hidden flex z-10"}>
-            <Button color={"secondary"} onClick={setModalMessageFormVisible}><Plus/></Button>
+        <div className={"absolute bottom-3 right-3 lg:hidden flex z-10"}>
+            <Button color={"primary"} onClick={setModalMessageFormVisible}><Plus/></Button>
             <ModalMessageForm userSessionData={userSessionData} modalMessageFormVisible={modalMessageFormVisible} toggleModalMessageForm={toggleModalMessageForm} messageListDiv={messageListDiv}/>
         </div>
     );

@@ -46,7 +46,7 @@ export default function ModalMessageForm({userSessionData, modalMessageFormVisib
                                               onChange={(e) => setMessageContent(e.target.value)}></TextareaAutosize>
                         </div>
                         <div className={"w-full flex justify-center"}>
-                            <Button className={"w-fit"} color={"secondary"} loading={isLoading} disabled={isLoading}
+                            <Button className={"w-fit"} color={"primary"} loading={isLoading} disabled={isLoading}
                                     size={"md"}><Send/>Poster</Button>
                         </div>
                     </Form>

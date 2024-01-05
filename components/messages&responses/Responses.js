@@ -1,46 +1,24 @@
 "use client"
-import {Avatar, Button, Dropdown, Link} from "react-daisyui";
+import {Avatar, Dropdown, Link} from "react-daisyui";
 import {useRouter} from "next/navigation";
 import {MessageSquare, MoreVertical, CornerRightDown, CornerLeftUp} from "react-feather";
-import axios from "axios";
 import Markdown from "react-markdown";
 import {Suspense} from "react";
 import LoadingMessagesSkeleton from "@/components/loadings/LoadingMessagesSkeleton";
 import DateChangerMessage from "@/functions/DateChangerMessage";
 import PremiumBadge from "@/components/main/PremiumBadge";
+import DeleteMessage from "@/functions/DeleteMessage";
+import GetMessageDataFromApi from "@/functions/GetMessageDataFromApi";
 
 export default function Responses({messages, userSessionData, skip, messageListDiv}) {
     const router = useRouter();
-    const getMessageDataFromApi = (messageId) => {
-        return axios.get(`/api/get/message?id=${messageId}`)
-            .then((response) => {
-                return response.data;
-            });
-    }
-
-    const deleteMessage = (messageId) => {
-        axios.post("/api/delete/message", {messageId: messageId, ownerId: userSessionData.id})
-            .then((response) => {
-                router.refresh();
-            });
-    }
-
-    const loadMore = () => {
-        router.push(`?skip=${Number(skip)+10}`);
-        messageListDiv.current.scrollTo({top: 0, behavior: 'smooth' });
-    }
-
-    const backUp = () => {
-        router.push("?");
-        messageListDiv.current.scrollTo({top: 0, behavior: 'smooth' });
-    }
 
     return (
         <Suspense fallback={<LoadingMessagesSkeleton/>}>
             {
                 messages.map(async (message) => {
-                    const messageParentData = await getMessageDataFromApi(message.responseFromId);
-                    const responseData = await getMessageDataFromApi(message.id);
+                    const messageParentData = await GetMessageDataFromApi(message.responseFromId);
+                    const responseData = await GetMessageDataFromApi(message.id);
 
                     return (
                         <div key={message.responseFromId} className={"flex flex-col border-b border-neutral"}>
@@ -66,7 +44,7 @@ export default function Responses({messages, userSessionData, skip, messageListD
                                                                 className={"font-bold"}>{messageParentData.owner.othername} </Link>
                                                             <Link
                                                                 onClick={() => router.push(`/user/${messageParentData.owner.name}`)}
-                                                                className={"font-bold text-neutral-content"}>@{messageParentData.owner.name}</Link>
+                                                                className={"font-bold text-neutral"}>@{messageParentData.owner.name}</Link>
                                                         </>
                                                         : <Link
                                                             onClick={() => router.push(`/user/${messageParentData.owner.name}`)}
@@ -78,7 +56,7 @@ export default function Responses({messages, userSessionData, skip, messageListD
                                                 <h3 className={"text-xs"}>{DateChangerMessage(messageParentData.created_at)}</h3>
                                             </div>
                                             <h3 className={"cursor-pointer whitespace-break-spaces"}
-                                                onClick={() => router.push(`/message/${message.responseFromId}`)}>{messageParentData.messageContent}</h3>
+                                                onClick={() => router.push(`/message/${message.responseFromId}`)}><Markdown>{messageParentData.messageContent}</Markdown></h3>
                                             <div className={"flex gap-1 items-center"}>
                                                 <h4 className={"text-sm"}>{messageParentData.responses}</h4>
                                                 <MessageSquare size={15}/>
@@ -91,7 +69,7 @@ export default function Responses({messages, userSessionData, skip, messageListD
                                                         <Dropdown.Toggle size={"sm"}><MoreVertical/></Dropdown.Toggle>
                                                         <Dropdown.Menu className="w-52">
                                                             <Dropdown.Item color={"primary"}
-                                                                           onClick={() => deleteMessage(message.responseFromId)}>Supprimer</Dropdown.Item>
+                                                                           onClick={() => DeleteMessage(message.responseFromId, userSessionData).then(response => {router.refresh();})}>Supprimer</Dropdown.Item>
                                                         </Dropdown.Menu>
                                                     </Dropdown>
                                                     : null
@@ -116,7 +94,7 @@ export default function Responses({messages, userSessionData, skip, messageListD
                                                     <Link onClick={() => router.push(`/user/${message.owner.name}`)}
                                                           className={"font-bold"}>{message.owner.othername} </Link>
                                                     <Link onClick={() => router.push(`/user/${message.owner.name}`)}
-                                                          className={"font-bold text-neutral-content"}>@{message.owner.name} </Link>
+                                                          className={"font-bold text-neutral"}>@{message.owner.name} </Link>
                                                 </>
                                                 : <Link onClick={() => router.push(`/user/${message.owner.name}`)}
                                                         className={"font-bold"}>@{message.owner.name} </Link>
@@ -140,7 +118,7 @@ export default function Responses({messages, userSessionData, skip, messageListD
                                                 <Dropdown.Toggle size={"sm"}><MoreVertical/></Dropdown.Toggle>
                                                 <Dropdown.Menu className="w-52">
                                                     <Dropdown.Item color={"primary"}
-                                                                   onClick={() => deleteMessage(message.id)}>Supprimer</Dropdown.Item>
+                                                                   onClick={() => DeleteMessage(message.id, userSessionData).then(response => {router.refresh();})}>Supprimer</Dropdown.Item>
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                             : null
@@ -151,13 +129,6 @@ export default function Responses({messages, userSessionData, skip, messageListD
                     );
                 })
             }
-            <div className={"flex justify-center m-5"}>
-                {
-                    messages.length < 10 ?
-                            <Button onClick={backUp} color={"secondary"} className={"w-1/3"}>Revenir au début</Button> :
-                            <Button onClick={loadMore} color={"secondary"} className={"w-1/3"}>Charger plus</Button>
-                }
-            </div>
         </Suspense>
     );
 }
