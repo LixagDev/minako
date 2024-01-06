@@ -1,7 +1,6 @@
-import {Avatar, Button, Dropdown, Link} from "react-daisyui";
+import {Avatar, Dropdown, Link} from "react-daisyui";
 import {useRouter} from "next/navigation";
 import {MessageSquare, MoreVertical} from "react-feather";
-import axios from "axios";
 import Markdown from "react-markdown";
 import {Suspense} from "react";
 import LoadingMessagesSkeleton from "@/components/loadings/LoadingMessagesSkeleton";
@@ -9,8 +8,9 @@ import DateChangerMessage from "@/functions/DateChangerMessage";
 import PremiumBadge from "@/components/main/PremiumBadge";
 import DeleteMessage from "@/functions/DeleteMessage";
 import GetMessageDataFromApi from "@/functions/GetMessageDataFromApi";
+import M_Avatar from "@/components/component/M_Avatar";
 
-export default function Messages({messages, userSessionData, skip, messageListDiv}) {
+export default function Messages({messages, userSessionData}) {
     const router = useRouter();
 
     return (
@@ -19,10 +19,8 @@ export default function Messages({messages, userSessionData, skip, messageListDi
                 messages.map(async (message) => {
                     const messageData = await GetMessageDataFromApi(message.id);
                     return (
-                        <div key={message.id} className={"w-full bg-base-200 border-b border-neutral flex gap-3 p-4"}>
-                            <Avatar onClick={() => router.push(`/user/${message.owner.name}`)} className={"cursor-pointer"} shape={"circle"}
-                                    src={message.owner.image} border borderColor={"neutral"}
-                                    size={"sm"}/>
+                        <div key={message.id} className={"w-full bg-base-100 shadow-md flex gap-3 p-4 rounded-xl"}>
+                            <M_Avatar onClick={() => router.push(`/user/${message.owner.name}`)} className={"cursor-pointer"} src={message.owner.image} size={"sm"}/>
                             <div className={"flex flex-col justify-center w-fit basis-full"}>
                                 <div className={"flex gap-2 items-center"}>
                                     {

@@ -1,5 +1,6 @@
 "use client"
-import {Avatar, Dropdown, Link} from "react-daisyui";
+import {Dropdown, Link} from "react-daisyui";
+import M_Avatar from "@/components/component/M_Avatar";
 import {useRouter} from "next/navigation";
 import {MessageSquare, MoreVertical, CornerRightDown, CornerLeftUp} from "react-feather";
 import Markdown from "react-markdown";
@@ -10,7 +11,7 @@ import PremiumBadge from "@/components/main/PremiumBadge";
 import DeleteMessage from "@/functions/DeleteMessage";
 import GetMessageDataFromApi from "@/functions/GetMessageDataFromApi";
 
-export default function Responses({messages, userSessionData, skip, messageListDiv}) {
+export default function Responses({messages, userSessionData}) {
     const router = useRouter();
 
     return (
@@ -21,19 +22,15 @@ export default function Responses({messages, userSessionData, skip, messageListD
                     const responseData = await GetMessageDataFromApi(message.id);
 
                     return (
-                        <div key={message.responseFromId} className={"flex flex-col border-b border-neutral"}>
+                        <div key={message.responseFromId} className={"flex flex-col bg-base-100 rounded-xl shadow-md"}>
                             {
                                 !messageParentData.id ?
-                                    <div className={"w-full bg-base-200 flex justify-center p-4"}>
+                                    <div className={"w-full bg-base-100 flex justify-center p-4 rounded-t-xl"}>
                                         <h2>Le message parent à été supprimé.</h2>
                                     </div>
                                     :
-                                    <div className={"w-full bg-base-200 flex gap-3 p-4"}>
-                                        <Avatar
-                                            onClick={async () => router.push(`/user/${messageParentData.owner.name}`)}
-                                            className={"cursor-pointer"} shape={"circle"}
-                                            src={messageParentData.owner.image} border borderColor={"neutral"}
-                                            size={"sm"}/>
+                                    <div className={"w-full bg-base-100 flex gap-3 p-4 rounded-t-xl"}>
+                                        <M_Avatar onClick={async () => router.push(`/user/${messageParentData.owner.name}`)} className={"cursor-pointer"} src={messageParentData.owner.image} size={"sm"}/>
                                         <div className={"flex flex-col justify-center w-fit basis-full"}>
                                             <div className={"flex gap-2 items-center"}>
                                                 {
@@ -81,11 +78,8 @@ export default function Responses({messages, userSessionData, skip, messageListD
                                 <CornerLeftUp/>
                                 <CornerRightDown/>
                             </div>
-                            <div className={"w-full bg-base-200 flex gap-3 p-4"}>
-                                <Avatar onClick={() => router.push(`/user/${message.owner.name}`)}
-                                        className={"cursor-pointer"} shape={"circle"}
-                                        src={message.owner.image} border borderColor={"neutral"}
-                                        size={"sm"}/>
+                            <div className={"w-full bg-base-200 flex gap-3 p-4 rounded-b-xl"}>
+                                <M_Avatar onClick={() => router.push(`/user/${message.owner.name}`)} className={"cursor-pointer"} src={message.owner.image} size={"sm"}/>
                                 <div className={"flex flex-col justify-center w-fit basis-full"}>
                                     <div className={"flex gap-2 items-center"}>
                                         {

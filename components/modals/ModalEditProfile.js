@@ -1,5 +1,6 @@
 "use client"
-import {Modal, Button, Input} from "react-daisyui";
+import {Modal, Input} from "react-daisyui";
+import M_Button from "@/components/component/M_Button";
 import {useState} from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import axios from "axios";
@@ -28,7 +29,7 @@ export default function ModalEditProfile({userSessionData, modalEditProfileVisib
                 <div className={"flex flex-col items-center w-full gap-4"}>
                     <div className={"flex flex-col w-full"}>
                         <h2>Nom</h2>
-                        <Input placeholder={"Votre nom"} value={othername} disabled={isLoading} maxLength={15}
+                        <Input placeholder={"Le gentleman"} value={othername} disabled={isLoading} maxLength={15}
                                onChange={(e) => setOthername(e.target.value)}/>
                     </div>
                     <div className={"flex flex-col w-full"}>
@@ -40,8 +41,8 @@ export default function ModalEditProfile({userSessionData, modalEditProfileVisib
                 </div>
             </Modal.Body>
             <Modal.Actions>
-                <Button onClick={toggleModalEditProfileVisible} disabled={isLoading}>Fermer</Button>
-                <Button color={"primary"} disabled={isLoading} loading={isLoading} onClick={saveProfil}>Enregistrer</Button>
+                <M_Button onClick={toggleModalEditProfileVisible} disabled={isLoading} text={"Fermer"} />
+                <M_Button color={"primary"} disabled={isLoading} loading={isLoading} onClick={saveProfil} text={"Enregistrer"} />
             </Modal.Actions>
         </Modal.Legacy>
     );

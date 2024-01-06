@@ -5,7 +5,7 @@ import {useRouter} from "next/navigation";
 
 export default function MinakoTitle() {
     const router = useRouter();
-    const minakoArray = Array.from("Minako");
+    const minakoArray = Array.from("minako");
 
     useEffect(() => {
         anime({
@@ -19,7 +19,7 @@ export default function MinakoTitle() {
             loop: true
         });
     }, []);
-    const minakoVersion = "0.0.5";
+    const minakoVersion = "0.0.6";
 
     return (
         <div className={"flex flex-col items-center"}>
@@ -34,7 +34,7 @@ export default function MinakoTitle() {
                     })
                 }
             </div>
-            <h2 class={"text-xs font-mono text-neutral"}>Alpha {minakoVersion}</h2>
+            <h2 class={"text-xs font-mono"}>Alpha {minakoVersion}</h2>
         </div>
     );
 }

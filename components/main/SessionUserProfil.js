@@ -3,11 +3,13 @@ import {Avatar, Button, Link} from "react-daisyui";
 import {LogOut} from "react-feather";
 import {signOut} from "next-auth/react";
 import PremiumBadge from "@/components/main/PremiumBadge";
+import M_Button from "@/components/component/M_Button";
+import M_Avatar from "@/components/component/M_Avatar";
 
 export default function SessionUserProfil({userSessionData}){
     return(
-        <div class={"flex gap-3 items-center p-5 rounded-xl bg-base-200"}>
-            <Avatar border borderColor={"neutral"} shape={"circle"} src={userSessionData.image} size={"sm"}/>
+        <div class={"flex gap-3 items-center p-5 rounded-xl bg-base-100 shadow-md w-full"}>
+            <M_Avatar src={userSessionData.image} size={"sm"}/>
             {
                 userSessionData.othername ?
                     <div class={"flex flex-col"}>
@@ -23,7 +25,9 @@ export default function SessionUserProfil({userSessionData}){
                         { userSessionData.isPremium ? <PremiumBadge mini={true} size={"sm"} username={userSessionData.name}/> : null}
                     </div>
             }
-            <Button onClick={() => signOut()} size={"sm"} className={"shadow-none"}><LogOut width={17}/></Button>
+            <div class={"flex w-full flex-row-reverse"}>
+                <M_Button className={""} onClick={() => signOut()} size={"sm"} startIcon={<LogOut width={17}/>} />
+            </div>
         </div>
     );
 }

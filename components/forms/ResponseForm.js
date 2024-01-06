@@ -1,5 +1,7 @@
 "use client"
-import {Avatar, Form, Button} from "react-daisyui";
+import {Form} from "react-daisyui";
+import M_Button from "@/components/component/M_Button";
+import M_Avatar from "@/components/component/M_Avatar";
 import TextareaAutosize from "react-textarea-autosize";
 import {useState} from "react";
 import axios from "axios";
@@ -23,16 +25,14 @@ export default function ResponseForm({userSessionData, messageParent}){
     }
 
     return(
-        <div className={"w-full p-4 justify-center flex border-b border-neutral"}>
+        <div className={"w-full p-4 justify-center flex bg-base-100 rounded-xl shadow-md"}>
             <Form onSubmit={handleSubmit} className={"flex flex-col w-full gap-3"}>
                 <div className={"flex gap-3 h-full items-center"}>
-                    <Avatar border borderColor={"neutral"} shape={"circle"}
-                            src={userSessionData.image}
-                            size={"sm"}/>
-                    <TextareaAutosize placeholder={`Que voulez vous répondre à ${messageParent.owner.name} ?`} className={"input w-full h-fit resize-none p-3"} required disabled={isLoading} value={responseContent} onChange={(e) => setResponseContent(e.target.value)}></TextareaAutosize>
+                    <M_Avatar src={userSessionData.image} size={"sm"}/>
+                    <TextareaAutosize placeholder={`Que voulez vous répondre à ${messageParent.owner.name} ?`} className={"input w-full h-fit resize-none p-3 input-bordered"} required disabled={isLoading} value={responseContent} onChange={(e) => setResponseContent(e.target.value)}></TextareaAutosize>
                 </div>
                 <div className={"w-full flex justify-center"}>
-                    <Button className={"w-fit"} color={"primary"} loading={isLoading} disabled={isLoading} size={"md"}><Send/>Répondre</Button>
+                    <M_Button className={"w-fit"} color={"primary"} loading={isLoading} disabled={isLoading} size={"md"} startIcon={<Send/>} text={"Répondre"}/>
                 </div>
             </Form>
         </div>

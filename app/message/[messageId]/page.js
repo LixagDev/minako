@@ -55,15 +55,11 @@ export default async function MessagePage({params, searchParams}){
 
             return(
                 <div className={"flex justify-center h-full"}>
-                    <div className={"basis-1/4 hidden lg:flex flex-col p-5"}>
-                        <LeftMenu userSessionData={userSessionData}/>
-                    </div>
+                    <LeftMenu userSessionData={userSessionData}/>
                     <div className={"w-full lg:basis-1/2"}>
                         <ResponsesList messageParent={messageParent} responses={responses} userSessionData={userSessionData} skip={skip}/>
                     </div>
-                    <div className={"basis-1/4 hidden lg:flex"}>
-                        <RightMenu/>
-                    </div>
+                    <RightMenu/>
                 </div>
             );
         }

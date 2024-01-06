@@ -1,5 +1,5 @@
 "use client"
-import {Avatar} from "react-daisyui";
+import M_Avatar from "@/components/component/M_Avatar";
 import MinakoTitle from "@/components/main/MinakoTitle";
 import {useState} from "react";
 import PhoneDrawer from "@/components/main/PhoneDrawer";
@@ -13,9 +13,10 @@ export default function PhoneNavbar({userSessionData}){
     return(
         <>
             <PhoneDrawer drawerVisible={drawerVisible} toggleDrawer={toggleDrawer} userSessionData={userSessionData}/>
-            <div className={"flex bg-base-300 p-5 flex border-b border-neutral lg:hidden items-center sticky top-0 z-10"}>
-                <Avatar onClick={toggleDrawer} className={"cursor-pointer basis-1/3"} shape={"circle"} src={userSessionData.image} border
-                        borderColor={"neutral"} size={"sm"}/>
+            <div className={"flex bg-base-100 p-4 flex lg:hidden items-center sticky top-3 z-10 shadow-lg rounded-xl"}>
+                <div className={"flex basis-1/3"}>
+                    <M_Avatar onClick={toggleDrawer} className={"cursor-pointer "} src={userSessionData.image} size={"sm"}/>
+                </div>
                 <div className={"flex justify-center basis-1/3"}>
                     <MinakoTitle/>
                 </div>

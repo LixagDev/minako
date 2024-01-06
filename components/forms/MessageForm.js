@@ -1,10 +1,14 @@
 "use client"
-import {Avatar, Form, Button} from "react-daisyui";
+import {Form} from "react-daisyui";
 import TextareaAutosize from "react-textarea-autosize";
 import {useState} from "react";
 import axios from "axios";
 import {useRouter} from "next/navigation";
 import {Send} from "react-feather";
+import M_Button from "@/components/component/M_Button";
+import M_Avatar from "@/components/component/M_Avatar";
+
+import Markdown from "react-markdown";
 
 export default function MessageForm({userSessionData}){
     const [messageContent, setMessageContent] = useState();
@@ -23,16 +27,14 @@ export default function MessageForm({userSessionData}){
     }
 
     return(
-        <div className={"bg-base-300 w-full p-4 lg:flex justify-center hidden border-b border-neutral"}>
+        <div className={"bg-base-100 w-full p-4 lg:flex justify-center hidden rounded-xl shadow-md"}>
             <Form onSubmit={handleSubmit} className={"flex flex-col w-full gap-3"}>
                 <div className={"flex gap-3 h-full items-center"}>
-                    <Avatar border borderColor={"neutral"} shape={"circle"}
-                            src={userSessionData.image}
-                            size={"sm"}/>
-                    <TextareaAutosize placeholder={"Est ce que pour vous, tout est bon ?"} className={"input w-full h-fit resize-none p-3"} required disabled={isLoading} value={messageContent} onChange={(e) => setMessageContent(e.target.value.replace(":)", "😁"))}></TextareaAutosize>
+                    <M_Avatar src={userSessionData.image} size={"sm"} />
+                    <TextareaAutosize placeholder={"Est ce que pour vous, tout est bon ?"} className={"input w-full h-fit resize-none p-3 input-bordered"} required disabled={isLoading} value={messageContent} onChange={(e) => setMessageContent(e.target.value.replace(":)", "😁"))}></TextareaAutosize>
                 </div>
                 <div className={"w-full flex justify-center"}>
-                    <Button className={"w-fit"} color={"primary"} loading={isLoading} disabled={isLoading} size={"md"}><Send/>Poster</Button>
+                    <M_Button className={"w-fit"} size={"md"} color={"primary"} loading={isLoading} disabled={isLoading} text={"Poster"} startIcon={<Send/>}/>
                 </div>
             </Form>
         </div>

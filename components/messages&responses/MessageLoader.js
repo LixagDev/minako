@@ -1,13 +1,25 @@
 "use client"
-import {Button} from "react-daisyui";
+import M_Button from "@/components/component/M_Button";
+import {useRouter} from "next/navigation";
 
-export default function MessageLoader({messages, backUp, loadMore}){
+export default function MessageLoader({messages, messageListDiv}){
+    const router = useRouter();
+
+    const loadMore = () => {
+        router.push(`?skip=${Number(skip)+10}`);
+        messageListDiv.current.scrollTo({top: 0, behavior: 'smooth' });
+    }
+    const backUp = () => {
+        router.push("?");
+        messageListDiv.current.scrollTo({top: 0, behavior: 'smooth' });
+    }
+
     return(
         <>
             {
-                messages.length < 10 ? <Button onClick={backUp} color={"primary"} className={"w-1/3"}>Revenir au début</Button>
+                messages.length < 10 ? <M_Button onClick={backUp} color={"primary"} className={"w-1/3"} text={"Revenir au début"} />
                     :
-                    <Button onClick={loadMore} color={"primary"} className={"w-1/3"}>Charger plus</Button>
+                    <M_Button onClick={loadMore} color={"primary"} className={"w-1/3"} text={"Charger plus"} />
             }
         </>
     )

@@ -1,7 +1,21 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   daisyui: {
-    themes: ["cupcake"],
+    themes: [{
+      minako:{
+        "primary": "#93c5fd",
+        "secondary": "#a5f3fc",
+        "accent": "#ddd6fe",
+        "neutral": "#94a3b8",
+        "base-100": "#ffffff",
+        "base-200": "#ffffff",
+        "base-300": "#f2f2f2",
+        "info": "#00dbff",
+        "success": "#ade500",
+        "warning": "#d79c00",
+        "error": "#ff7a78",
+      }
+    }],
   },
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',

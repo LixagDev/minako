@@ -46,6 +46,9 @@ export default async function UserPage({params, searchParams}){
                         ownerId: true,
                         responseFromId: true,
                     },
+                    orderBy:{
+                        created_at: "desc"
+                    },
                     skip: skip,
                     take: 10,
                 }
@@ -76,15 +79,11 @@ export default async function UserPage({params, searchParams}){
 
             return(
                 <div className={"flex justify-center h-full"}>
-                    <div className={"basis-1/4 hidden lg:flex flex-col p-5"}>
-                        <LeftMenu userSessionData={userSessionData}/>
-                    </div>
+                    <LeftMenu userSessionData={userSessionData}/>
                     <div className={"w-full lg:basis-1/2"}>
                         <UserProfile userRequestData={userRequestData} userSessionData={userSessionData} userRequestResponse={userRequestResponses} skip={skip}/>
                     </div>
-                    <div className={"basis-1/4 hidden lg:flex"}>
-                        <RightMenu/>
-                    </div>
+                    <RightMenu/>
                 </div>
             );
         }

@@ -1,5 +1,6 @@
 "use client"
 import {Button} from "react-daisyui";
+import M_Button from "@/components/component/M_Button";
 import {User, Send, Star, GitHub} from "react-feather";
 import {useRouter} from "next/navigation";
 import {useState} from "react";
@@ -26,12 +27,11 @@ export default function LeftMenuButtons({userSessionData, isDrawer}){
                 {
                     buttons.map((button) => {
                         return (
-                            <Button className={"w-full"}
-                                    onClick={() => router.push(button.href)} disabled={button.disabled}>{button.icon}{button.name}</Button>
+                            <M_Button className={"w-full"} onClick={() => router.push(button.href)} disabled={button.disabled} startIcon={button.icon} text={button.name}/>
                         );
                     })
                 }
-                {!isDrawer ? <Button className={"w-full"} color={"primary"} onClick={() => toggleModalMessageForm()}><Send/>Poster</Button> : null}
+                {!isDrawer ? <M_Button className={"w-full"} color={"primary"} onClick={() => toggleModalMessageForm()} startIcon={<Send/>} text={"Poster"}/> : null}
             </div>
         </>
     );

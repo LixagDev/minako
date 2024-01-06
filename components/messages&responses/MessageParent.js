@@ -1,11 +1,11 @@
 "use client"
 import DateChangerMessage from "@/functions/DateChangerMessage";
-import {Avatar, Dropdown, Link} from "react-daisyui";
+import {Dropdown, Link} from "react-daisyui";
+import M_Avatar from "@/components/component/M_Avatar";
 import {MoreVertical} from "react-feather";
 import Markdown from "react-markdown";
 import {useRouter} from "next/navigation";
 import axios from "axios";
-import BackBar from "@/components/main/BackBar";
 import PremiumBadge from "@/components/main/PremiumBadge";
 
 export default function MessageParent({messageParent, userSessionData}){
@@ -20,11 +20,8 @@ export default function MessageParent({messageParent, userSessionData}){
 
     return(
         <div className={"flex flex-col"}>
-            <div className={"w-full bg-base-300 border-b border-neutral flex gap-3 p-4"}>
-                <Avatar onClick={() => router.push(`/user/${messageParent.owner.name}`)} className={"cursor-pointer"}
-                        shape={"circle"}
-                        src={messageParent.owner.image} border borderColor={"neutral"}
-                        size={"sm"}/>
+            <div className={"w-full bg-base-100 rounded-xl shadow-md flex gap-3 p-4"}>
+                <M_Avatar onClick={() => router.push(`/user/${messageParent.owner.name}`)} className={"cursor-pointer"} src={messageParent.owner.image} size={"sm"}/>
                 <div className={"flex flex-col justify-center w-fit basis-full"}>
                     <div className={"flex gap-2 items-center"}>
                         {

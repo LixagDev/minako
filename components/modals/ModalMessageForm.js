@@ -1,5 +1,7 @@
 "use client"
-import {Modal, Button, Form, Avatar} from "react-daisyui";
+import {Modal, Form, Button} from "react-daisyui";
+import M_Avatar from "@/components/component/M_Avatar";
+import M_Button from "@/components/component/M_Button";
 import {useState} from "react";
 import {useRouter} from "next/navigation";
 import axios from "axios";
@@ -37,17 +39,14 @@ export default function ModalMessageForm({userSessionData, modalMessageFormVisib
                 <div className={"w-full md:flex justify-center"}>
                     <Form onSubmit={handleSubmit} className={"flex flex-col w-full gap-3"}>
                         <div className={"flex gap-3 h-full items-center"}>
-                            <Avatar border borderColor={"neutral"} shape={"circle"}
-                                    src={userSessionData.image}
-                                    size={"sm"}/>
+                            <M_Avatar src={userSessionData.image} size={"sm"}/>
                             <TextareaAutosize placeholder={"Est ce que pour vous, tout est bon ?"}
-                                              className={"input w-full h-fit resize-none p-3 bg-base-200"} required
+                                              className={"input w-full h-fit resize-none p-3 bg-base-100 input-bordered"} required
                                               disabled={isLoading} value={messageContent}
                                               onChange={(e) => setMessageContent(e.target.value)}></TextareaAutosize>
                         </div>
                         <div className={"w-full flex justify-center"}>
-                            <Button className={"w-fit"} color={"primary"} loading={isLoading} disabled={isLoading}
-                                    size={"md"}><Send/>Poster</Button>
+                            <M_Button className={"w-fit"} color={"primary"} loading={isLoading} disabled={isLoading} size={"md"} startIcon={<Send/>} text={"Poster"} />
                         </div>
                     </Form>
                 </div>
