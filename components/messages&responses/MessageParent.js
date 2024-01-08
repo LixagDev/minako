@@ -23,7 +23,7 @@ export default function MessageParent({messageParent, userSessionData}){
             <div className={"w-full bg-base-100 rounded-xl shadow-md flex gap-3 p-4"}>
                 <M_Avatar onClick={() => router.push(`/user/${messageParent.owner.name}`)} className={"cursor-pointer"} src={messageParent.owner.image} size={"sm"}/>
                 <div className={"flex flex-col justify-center w-fit basis-full"}>
-                    <div className={"flex gap-2 items-center"}>
+                    <div className={"flex gap-x-2 flex-wrap items-center"}>
                         {
                             messageParent.owner.othername ?
                                 <>

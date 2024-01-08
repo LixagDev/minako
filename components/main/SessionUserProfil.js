@@ -8,7 +8,7 @@ import M_Avatar from "@/components/component/M_Avatar";
 
 export default function SessionUserProfil({userSessionData}){
     return(
-        <div class={"flex gap-3 items-center p-5 rounded-xl bg-base-100 shadow-md w-full"}>
+        <div class={"flex gap-3 items-center p-5 rounded-xl bg-base-100 shadow-md w-full flex-wrap lg:flex-nowrap "}>
             <M_Avatar src={userSessionData.image} size={"sm"}/>
             {
                 userSessionData.othername ?
@@ -26,7 +26,7 @@ export default function SessionUserProfil({userSessionData}){
                     </div>
             }
             <div class={"flex w-full flex-row-reverse"}>
-                <M_Button className={""} onClick={() => signOut()} size={"sm"} startIcon={<LogOut width={17}/>} />
+                <M_Button onClick={() => signOut()} size={"sm"} startIcon={<LogOut width={17}/>} />
             </div>
         </div>
     );

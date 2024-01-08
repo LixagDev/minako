@@ -32,7 +32,7 @@ export default function Responses({messages, userSessionData}) {
                                     <div className={"w-full bg-base-100 flex gap-3 p-4 rounded-t-xl"}>
                                         <M_Avatar onClick={async () => router.push(`/user/${messageParentData.owner.name}`)} className={"cursor-pointer"} src={messageParentData.owner.image} size={"sm"}/>
                                         <div className={"flex flex-col justify-center w-fit basis-full"}>
-                                            <div className={"flex gap-2 items-center"}>
+                                            <div className={"flex gap-x-2 flex-wrap items-center"}>
                                                 {
                                                     messageParentData.owner.othername ?
                                                         <>
@@ -81,7 +81,7 @@ export default function Responses({messages, userSessionData}) {
                             <div className={"w-full bg-base-200 flex gap-3 p-4 rounded-b-xl"}>
                                 <M_Avatar onClick={() => router.push(`/user/${message.owner.name}`)} className={"cursor-pointer"} src={message.owner.image} size={"sm"}/>
                                 <div className={"flex flex-col justify-center w-fit basis-full"}>
-                                    <div className={"flex gap-2 items-center"}>
+                                    <div className={"flex gap-x-2 flex-wrap items-center"}>
                                         {
                                             message.owner.othername ?
                                                 <>

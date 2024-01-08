@@ -19,7 +19,7 @@ export default function UserProfile({userRequestData, userSessionData, userReque
     return(
         <div ref={messageListDiv} className={"flex flex-col gap-3 w-full overflow-x-hidden overflow-y-scroll h-full pl-3 pr-3 pb-3"}>
             <PhoneNavbar userSessionData={userSessionData}/>
-            <BackBar content={userRequestData.name} other={`À rejoint Minako le ${DateChangerProfil(userRequestData.created_at)}`}/>
+            <BackBar content={userRequestData.name} other={`À rejoint minako en ${DateChangerProfil(userRequestData.created_at)}`}/>
             <UserInfo userRequestData={userRequestData} userSessionData={userSessionData}/>
             <div className={"flex w-full join"}>
                 <M_Button className={"join-item w-1/2"} active={wantSeeMessage} onClick={() => setWantSeeMessage(true)} text={"Message"} />

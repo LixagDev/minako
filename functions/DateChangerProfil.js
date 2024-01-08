@@ -1,11 +1,5 @@
 export default function DateChangerProfil(date){
-    date = new Date(date);
-    var day = date.getDay();
-    switch (day){
-        case 1: day = "1er"; break;
-    }
-
-    var month = date.getMonth()+1;
+    let month = date.getMonth()+1;
     switch (month){
         case 1: month = "Janvier"; break;
         case 2: month = "Février"; break;
@@ -23,5 +17,5 @@ export default function DateChangerProfil(date){
 
     const year = date.getFullYear();
 
-    return `${day} ${month} ${year}`;
+    return `${month} ${year}`;
 }

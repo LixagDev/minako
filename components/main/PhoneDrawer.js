@@ -7,8 +7,8 @@ import MinakoTitle from "@/components/main/MinakoTitle";
 export default function PhoneDrawer({drawerVisible, toggleDrawer, userSessionData}){
     return(
         <Drawer className={"z-20"} open={drawerVisible} onClickOverlay={toggleDrawer} side={
-            <div className={"p-2 w-fit flex h-full bg-base-300"}>
-                <div className={"basis-1/4 flex w-full flex-col p-5"}>
+            <div className={"p-2 md:w-fit w-2/3 flex h-full bg-base-300 overflow-hidden"}>
+                <div className={"flex w-full flex-col p-5"}>
                     <div className={"flex w-full h-1/2 justify-center"}>
                         <MinakoTitle/>
                     </div>

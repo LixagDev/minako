@@ -19,10 +19,10 @@ export default function Messages({messages, userSessionData}) {
                 messages.map(async (message) => {
                     const messageData = await GetMessageDataFromApi(message.id);
                     return (
-                        <div key={message.id} className={"w-full bg-base-100 shadow-md flex gap-3 p-4 rounded-xl"}>
+                        <div key={message.id} className={"w-full bg-base-100 shadow-md flex  gap-3 p-4 rounded-xl"}>
                             <M_Avatar onClick={() => router.push(`/user/${message.owner.name}`)} className={"cursor-pointer"} src={message.owner.image} size={"sm"}/>
                             <div className={"flex flex-col justify-center w-fit basis-full"}>
-                                <div className={"flex gap-2 items-center"}>
+                                <div className={"flex gap-x-2 flex-wrap items-center"}>
                                     {
                                         message.owner.othername ?
                                             <>
@@ -40,7 +40,7 @@ export default function Messages({messages, userSessionData}) {
                                     <MessageSquare size={15}/>
                                 </div>
                             </div>
-                            <div className={"flex items-center flex-row-reverse "}>
+                            <div className={"flex items-center flex-row-reverse"}>
                                 {
                                     userSessionData.id === message.owner.id ?
                                         <Dropdown horizontal={"left"}>

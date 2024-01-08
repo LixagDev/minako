@@ -24,15 +24,15 @@ export default function UserInfo({userRequestData, userSessionData}){
             <ModalEditProfile toggleModalEditProfileVisible={toggleModalEditProfileVisible} modalEditProfileVisible={modalEditProfileVisible} userSessionData={userRequestData}/>
             <ModalZoomPicture src={userRequestData.image} modalZoomPictureVisible={modalZoomPictureVisible} toggleModalZoomPictureVisible={toggleModalZoomPictureVisible}/>
             <div className={"flex flex-col w-full p-4 justify-center bg-base-100 rounded-xl shadow-md gap-4 items-center relative"}>
-                <div className={"flex gap-3 items-center justify-center"}>
+                <div className={"flex gap-3 items-center justify-center flex-col sm:flex-row"}>
                     <M_Avatar onClick={toggleModalZoomPictureVisible} src={userRequestData.image} className={"hidden lg:flex animate-none cursor-pointer"} size={"lg"}/>
                     <M_Avatar onClick={toggleModalZoomPictureVisible} src={userRequestData.image} className={"lg:hidden flex cursor-pointer"} size={"md"}/>
                     <div className={"flex flex-col"}>
                         <div className={"flex gap-2"}>
                             {
                                 userRequestData.othername ?
-                                    <div className={"flex flex-col"}>
-                                        <div className={"flex items-center gap-2"}>
+                                    <div className={"flex flex-col items-center sm:items-start"}>
+                                        <div className={"flex items-center gap-2 items-center sm:items-start"}>
                                             <h2 className={"font-bold lg:text-3xl text-2xl"}>{userRequestData.othername}</h2>
                                             {userRequestData.isPremium ?
                                                 <PremiumBadge size={"md"} username={userRequestData.name}/> : null}
@@ -40,15 +40,15 @@ export default function UserInfo({userRequestData, userSessionData}){
                                         <h2 className={"font-bold lg:text-2xl text-2xl text-neutral"}>@{userRequestData.name}</h2>
                                     </div>
                                     :
-                                    <div className={"flex items-center gap-2"}>
+                                    <div className={"flex items-center gap-2 items-center sm:items-start"}>
                                         <h2 className={"font-bold lg:text-3xl text-2xl"}>@{userRequestData.name}</h2>
                                         {userRequestData.isPremium ?
                                             <PremiumBadge size={"md"} username={userRequestData.name}/> : null}
                                     </div>
                             }
                         </div>
-                        <h3 className={"text-neutral lg:text-base text-sm"}>À rejoint Minako
-                            le {DateChangerProfil(userRequestData.created_at)}</h3>
+                        <h3 className={"text-neutral lg:text-base text-sm"}>À rejoint minako
+                            en {DateChangerProfil(userRequestData.created_at)}</h3>
                     </div>
                 </div>
                 {
