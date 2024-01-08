@@ -28,11 +28,11 @@ export default function UserInfo({userRequestData, userSessionData}){
                     <M_Avatar onClick={toggleModalZoomPictureVisible} src={userRequestData.image} className={"hidden lg:flex animate-none cursor-pointer"} size={"lg"}/>
                     <M_Avatar onClick={toggleModalZoomPictureVisible} src={userRequestData.image} className={"lg:hidden flex cursor-pointer"} size={"md"}/>
                     <div className={"flex flex-col"}>
-                        <div className={"flex gap-2"}>
+                        <div className={"flex gap-2 justify-center sm:justify-start"}>
                             {
                                 userRequestData.othername ?
                                     <div className={"flex flex-col items-center sm:items-start"}>
-                                        <div className={"flex items-center gap-2 items-center sm:items-start"}>
+                                        <div className={"flex items-center gap-2"}>
                                             <h2 className={"font-bold lg:text-3xl text-2xl"}>{userRequestData.othername}</h2>
                                             {userRequestData.isPremium ?
                                                 <PremiumBadge size={"md"} username={userRequestData.name}/> : null}
@@ -40,7 +40,7 @@ export default function UserInfo({userRequestData, userSessionData}){
                                         <h2 className={"font-bold lg:text-2xl text-2xl text-neutral"}>@{userRequestData.name}</h2>
                                     </div>
                                     :
-                                    <div className={"flex items-center gap-2 items-center sm:items-start"}>
+                                    <div className={"flex gap-2"}>
                                         <h2 className={"font-bold lg:text-3xl text-2xl"}>@{userRequestData.name}</h2>
                                         {userRequestData.isPremium ?
                                             <PremiumBadge size={"md"} username={userRequestData.name}/> : null}
