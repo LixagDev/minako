@@ -64,7 +64,7 @@ export default async function Search({searchParams}){
             <div className={"flex justify-center h-full"}>
                 <LeftMenu userSessionData={userSessionData}/>
                 <div className={"w-full lg:basis-1/2"}>
-                    <SearchList query={query} recent={recent} searchResult={searchResult} userSessionData={userSessionData} />
+                    <SearchList isAfterSearch={true} query={query} recent={recent} searchResult={searchResult} userSessionData={userSessionData} />
                 </div>
                 <RightMenu query={query} isAfterSearch={true}/>
             </div>

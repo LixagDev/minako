@@ -55,17 +55,17 @@ Mais il faut aussi le préciser côté application Discord via un lien Redirect.
 ![App Screenshot](https://imgdb.net/storage/uploads/73784ac652e1cfb926bc50346e051328956466e30b6988dfe393f1268b4ae5da.png)
 
 Pars la suite nous allons ajouter une nouvelle variable d'environnement où vous allez y mettre un clé secret qui permet d'encrypter les données passantes quand vous vous connectez. Il est conseillé de mettre un hash en base 64 par exemple.
-```bash
+```env
   NEXTAUTH_SECRET="HASH BASE64"
 ```
 
-Et pour finir avec les variables d'environnement, une dernière très importante qui va contenir le lien de notre base de donnée ( exemple : mysql://NOM_UTILISATEUR:MOTDEPASSE@HOST:PORT/NOM_BASE_DE_DONNÉES ) :
-```bash
+Et pour finir avec les variables d'environnement, une dernière très importante qui va contenir le lien de notre base de données ( exemple : mysql://NOM_UTILISATEUR:MOTDEPASSE@HOST:PORT/NOM_BASE_DE_DONNÉES ) :
+```env
   DATABASE_URL="LIEN BASE DE DONNÉES"
 ```
 
-Ouf, c'est enfin finir avec le fichier **.env**, si tout est bon il devait ressembler à ceci :
-```bash
+Ouf, c'est enfin fini avec le fichier **.env**, si tout est bon il devrait ressembler à ceci :
+```env
   DISCORD_CLIENT_ID="CLIENT ID"
   DISCORD_CLIENT_SECRET="CLIENT SECRET"
   NEXTAUTH_URL="http://localhost:3000"
