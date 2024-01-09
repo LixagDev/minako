@@ -3,7 +3,7 @@ import M_Avatar from "@/components/component/M_Avatar";
 import M_Button from "@/components/component/M_Button";
 import DateChangerProfil from "@/functions/DateChangerProfil";
 import PremiumBadge from "@/components/main/PremiumBadge";
-import {Edit} from "react-feather";
+import {Edit, Calendar} from "react-feather";
 import {useState} from "react";
 import ModalEditProfile from "@/components/modals/ModalEditProfile";
 import ModalZoomPicture from "@/components/modals/ModalZoomPicture";

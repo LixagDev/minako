@@ -1,4 +1,4 @@
-import {Avatar, Dropdown, Link} from "react-daisyui";
+import {Dropdown, Link} from "react-daisyui";
 import {useRouter} from "next/navigation";
 import {MessageSquare, MoreVertical} from "react-feather";
 import Markdown from "react-markdown";

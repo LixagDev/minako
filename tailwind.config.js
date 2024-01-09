@@ -10,10 +10,6 @@ module.exports = {
         "base-100": "#ffffff",
         "base-200": "#ffffff",
         "base-300": "#f2f2f2",
-        "info": "#00dbff",
-        "success": "#ade500",
-        "warning": "#d79c00",
-        "error": "#ff7a78",
       }
     }],
   },

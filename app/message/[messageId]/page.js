@@ -51,6 +51,9 @@ export default async function MessagePage({params, searchParams}){
                 },
                 take: 10,
                 skip: skip,
+                orderBy:{
+                    created_at: "desc"
+                },
             });
 
             return(
