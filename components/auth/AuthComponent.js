@@ -21,7 +21,7 @@ export default function AuthComponent({session, providers}){
     else{
         return (
             <div className={"w-80 flex flex-col justify-center"}>
-                <M_Button onClick={() => signIn(providers.discord.id)} className={"anime-button"} startIcon={<Image src={DiscordImg} width={25} alt={providers.discord.name}/>} text={`Se connecter avec ${providers.discord.name}`} />
+                <M_Button onClick={() => signIn(providers.discord.id, {callbackUrl: "/home"})} className={"anime-button"} startIcon={<Image src={DiscordImg} width={25} alt={providers.discord.name}/>} text={`Se connecter avec ${providers.discord.name}`} />
             </div>
         );
     }
