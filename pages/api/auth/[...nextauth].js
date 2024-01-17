@@ -14,9 +14,6 @@ export const authOptions = {
         }),
     ],
     secret: process.env.NEXTAUTH_SECRET,
-    pages:{
-        signIn: "/"
-    },
     callbacks: {
         async signIn({ user, account, profile, email, credentials }) {
             const isAllowedToSignIn = true;
@@ -31,10 +28,7 @@ export const authOptions = {
                 });
                 return true
             } else {
-                // Return false to display a default error message
                 return false
-                // Or you can return a URL to redirect to:
-                // return '/unauthorized'
             }
         }
     }
