@@ -19,7 +19,7 @@ export default function MinakoTitle() {
             loop: true
         });
     }, []);
-    const minakoVersion = "0.0.7.1";
+    const minakoVersion = "0.0.7.2";
 
     return (
         <div className={"flex flex-col items-center"}>
