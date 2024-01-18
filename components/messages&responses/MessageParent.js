@@ -5,18 +5,10 @@ import M_Avatar from "@/components/component/M_Avatar";
 import {MoreVertical} from "react-feather";
 import Markdown from "react-markdown";
 import {useRouter} from "next/navigation";
-import axios from "axios";
-import PremiumBadge from "@/components/main/PremiumBadge";
+import DeleteMessage from "@/functions/DeleteMessage";
 
 export default function MessageParent({messageParent, userSessionData}){
     const router = useRouter();
-
-    const deleteMessage = (messageId) => {
-        axios.post("/api/delete/message", {messageId: messageId, ownerId: userSessionData.id})
-            .then((response) => {
-                router.push("/home");
-            });
-    }
 
     return(
         <div className={"flex flex-col"}>
@@ -32,7 +24,6 @@ export default function MessageParent({messageParent, userSessionData}){
                                 </>
                                 : <Link onClick={() => router.push(`/user/${messageParent.owner.name}`)} className={"font-bold text-lg"}>@{messageParent.owner.name} </Link>
                         }
-                        {messageParent.owner.isPremium ? <PremiumBadge mini={true} size={"sm"} username={messageParent.owner.name}/> : null}
                         <h3 className={"text-xs"}>{DateChangerMessage(messageParent.created_at)}</h3>
                     </div>
                     <h3 className={"cursor-pointer text-lg"} onClick={() => router.push(`/message/${messageParent.id}`)}>
@@ -45,7 +36,7 @@ export default function MessageParent({messageParent, userSessionData}){
                                 <Dropdown.Toggle size={"sm"}><MoreVertical/></Dropdown.Toggle>
                                 <Dropdown.Menu className="w-52">
                                     <Dropdown.Item color={"primary"}
-                                                   onClick={() => deleteMessage(messageParent.id)}>Supprimer</Dropdown.Item>
+                                                   onClick={() => DeleteMessage(messageParent.id, userSessionData).then(() => router.push("/home"))}>Supprimer</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                             : null
