@@ -3,7 +3,6 @@ import {authOptions} from "@/pages/api/auth/[...nextauth]";
 import AuthComponent from "@/components/auth/AuthComponent";
 import WelcomeText from "@/components/welcome/WelcomeText";
 import {getProviders} from "next-auth/react";
-import Head from "next/head";
 
 export default async function Welcome(){
     const session = await getServerSession(authOptions);
