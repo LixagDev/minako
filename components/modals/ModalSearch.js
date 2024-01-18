@@ -1,6 +1,5 @@
 "use client"
 import {Modal} from "react-daisyui";
-import M_Button from "@/components/component/M_Button";
 import Filter from "@/components/search/Filter"
 import SearchForm from "@/components/forms/SearchForm";
 
