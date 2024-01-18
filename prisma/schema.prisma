@@ -36,17 +36,18 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?   @unique
+  id            String     @id @default(cuid())
+  name          String     @unique
   othername     String?
-  email         String?   @unique
+  email         String     @unique
   emailVerified String?
   about         String?
   image         String?
-  created_at    DateTime  @default(now())
+  created_at    DateTime   @default(now())
   accounts      Account[]
   sessions      Session[]
   messages      Message[]
+  settings      Settings[]
 }
 
 model VerificationToken {
@@ -63,4 +64,11 @@ model Message {
   isResponse     Boolean
   responseFromId Int?
   created_at     String
+}
+
+model Settings {
+  id           Int     @id @default(autoincrement())
+  User         User?   @relation(fields: [userId], references: [id])
+  userId       String?
+  wantResponse Boolean @default(true)
 }
