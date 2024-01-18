@@ -25,10 +25,10 @@ export default function Messages({messages, userSessionData}) {
                                     {
                                         message.owner.othername ?
                                             <>
-                                                <Link onClick={() => router.push(`/user/${message.owner.name}`)} className={"font-bold"}>{message.owner.othername} </Link>
-                                                <Link onClick={() => router.push(`/user/${message.owner.name}`)} className={"font-bold text-neutral"}>@{message.owner.name} </Link>
+                                                <Link onClick={() => router.push(`/user/${message.owner.name}`)} className={"font-bold"}>{message.owner.othername}</Link>
+                                                <Link onClick={() => router.push(`/user/${message.owner.name}`)} className={"font-bold text-neutral"}>@{message.owner.name}</Link>
                                             </>
-                                            : <Link onClick={() => router.push(`/user/${message.owner.name}`)} className={"font-bold"}>@{message.owner.name} </Link>
+                                            : <Link onClick={() => router.push(`/user/${message.owner.name}`)} className={"font-bold"}>@{message.owner.name}</Link>
                                     }
                                     <h3 className={"text-xs"}>{DateChangerMessage(message.created_at)}</h3>
                                 </div>
