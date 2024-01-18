@@ -68,7 +68,12 @@ export default async function UserPage({params, searchParams}){
                     content: true,
                     responseFromId: true,
                     created_at: true,
-                }
+                },
+                orderBy:{
+                    created_at: "desc"
+                },
+                skip: skip,
+                take: 10,
             });
 
             const userSessionData = await prisma.user.findUnique({
