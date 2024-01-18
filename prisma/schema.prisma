@@ -43,7 +43,6 @@ model User {
   emailVerified String?
   about         String?
   image         String?
-  isPremium     Boolean   @default(false)
   created_at    DateTime  @default(now())
   accounts      Account[]
   sessions      Session[]

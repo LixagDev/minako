@@ -7,7 +7,6 @@ import Markdown from "react-markdown";
 import {Suspense} from "react";
 import LoadingMessagesSkeleton from "@/components/loadings/LoadingMessagesSkeleton";
 import DateChangerMessage from "@/functions/DateChangerMessage";
-import PremiumBadge from "@/components/main/PremiumBadge";
 import DeleteMessage from "@/functions/DeleteMessage";
 import GetMessageDataFromApi from "@/functions/GetMessageDataFromApi";
 
@@ -47,9 +46,6 @@ export default function Responses({messages, userSessionData}) {
                                                             onClick={() => router.push(`/user/${messageParentData.owner.name}`)}
                                                             className={"font-bold"}>@{messageParentData.owner.name}</Link>
                                                 }
-                                                {messageParentData.owner.isPremium ?
-                                                    <PremiumBadge mini={true} size={"sm"}
-                                                                  username={messageParentData.owner.name}/> : null}
                                                 <h3 className={"text-xs"}>{DateChangerMessage(messageParentData.created_at)}</h3>
                                             </div>
                                             <h3 className={"cursor-pointer whitespace-break-spaces"}
@@ -93,8 +89,6 @@ export default function Responses({messages, userSessionData}) {
                                                 : <Link onClick={() => router.push(`/user/${message.owner.name}`)}
                                                         className={"font-bold"}>@{message.owner.name} </Link>
                                         }
-                                        {message.owner.isPremium ? <PremiumBadge mini={true} size={"sm"}
-                                                                                 username={message.owner.name}/> : null}
                                         <h3 className={"text-xs"}>{DateChangerMessage(message.created_at)}</h3>
                                     </div>
                                     <h3 className={"cursor-pointer"}
@@ -112,7 +106,7 @@ export default function Responses({messages, userSessionData}) {
                                                 <Dropdown.Toggle size={"sm"}><MoreVertical/></Dropdown.Toggle>
                                                 <Dropdown.Menu className="w-52">
                                                     <Dropdown.Item color={"primary"}
-                                                                   onClick={() => DeleteMessage(message.id, userSessionData).then(response => {router.refresh();})}>Supprimer</Dropdown.Item>
+                                                                   onClick={() => DeleteMessage(message.id, userSessionData).then(() => {router.refresh();})}>Supprimer</Dropdown.Item>
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                             : null

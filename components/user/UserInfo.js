@@ -2,8 +2,7 @@
 import M_Avatar from "@/components/component/M_Avatar";
 import M_Button from "@/components/component/M_Button";
 import DateChangerProfil from "@/functions/DateChangerProfil";
-import PremiumBadge from "@/components/main/PremiumBadge";
-import {Edit, Calendar} from "react-feather";
+import {Edit} from "react-feather";
 import {useState} from "react";
 import ModalEditProfile from "@/components/modals/ModalEditProfile";
 import ModalZoomPicture from "@/components/modals/ModalZoomPicture";
@@ -34,16 +33,12 @@ export default function UserInfo({userRequestData, userSessionData}){
                                     <div className={"flex flex-col items-center sm:items-start"}>
                                         <div className={"flex items-center gap-2"}>
                                             <h2 className={"font-bold lg:text-3xl text-2xl"}>{userRequestData.othername}</h2>
-                                            {userRequestData.isPremium ?
-                                                <PremiumBadge size={"md"} username={userRequestData.name}/> : null}
                                         </div>
                                         <h2 className={"font-bold lg:text-2xl text-2xl text-neutral"}>@{userRequestData.name}</h2>
                                     </div>
                                     :
                                     <div className={"flex gap-2"}>
                                         <h2 className={"font-bold lg:text-3xl text-2xl"}>@{userRequestData.name}</h2>
-                                        {userRequestData.isPremium ?
-                                            <PremiumBadge size={"md"} username={userRequestData.name}/> : null}
                                     </div>
                             }
                         </div>

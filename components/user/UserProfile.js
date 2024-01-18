@@ -8,7 +8,6 @@ import Divider from "@/components/main/Divider";
 import M_Button from "@/components/component/M_Button";
 import DateChangerProfil from "@/functions/DateChangerProfil";
 import MessageLoader from "@/components/messages&responses/MessageLoader";
-import M_Avatar from "@/components/component/M_Avatar";
 const Responses = dynamic(() => import("@/components/messages&responses/Responses"), { ssr: false,  });
 const Messages = dynamic(() => import("@/components/messages&responses/Messages"), { ssr: false });
 

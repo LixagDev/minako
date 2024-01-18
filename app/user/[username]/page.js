@@ -5,7 +5,6 @@ import {getServerSession} from "next-auth";
 import {redirect} from "next/navigation";
 import {authOptions} from "@/pages/api/auth/[...nextauth]";
 import {PrismaClient} from '@prisma/client'
-import BackBar from "@/components/main/BackBar";
 const prisma = new PrismaClient()
 
 export default async function UserPage({params, searchParams}){
@@ -30,7 +29,6 @@ export default async function UserPage({params, searchParams}){
                 name: true,
                 othername: true,
                 image: true,
-                isPremium: true,
                 about: true,
                 created_at: true,
                 messages:{

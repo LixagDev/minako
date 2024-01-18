@@ -5,7 +5,6 @@ import Markdown from "react-markdown";
 import {Suspense} from "react";
 import LoadingMessagesSkeleton from "@/components/loadings/LoadingMessagesSkeleton";
 import DateChangerMessage from "@/functions/DateChangerMessage";
-import PremiumBadge from "@/components/main/PremiumBadge";
 import DeleteMessage from "@/functions/DeleteMessage";
 import GetMessageDataFromApi from "@/functions/GetMessageDataFromApi";
 import M_Avatar from "@/components/component/M_Avatar";
@@ -31,7 +30,6 @@ export default function Messages({messages, userSessionData}) {
                                             </>
                                             : <Link onClick={() => router.push(`/user/${message.owner.name}`)} className={"font-bold"}>@{message.owner.name} </Link>
                                     }
-                                    {message.owner.isPremium ? <PremiumBadge mini={true} size={"sm"} username={message.owner.name} /> : null}
                                     <h3 className={"text-xs"}>{DateChangerMessage(message.created_at)}</h3>
                                 </div>
                                 <h3 className={"cursor-pointer"} onClick={() => router.push(`/message/${message.id}`)}><Markdown className={"whitespace-break-spaces"}>{message.content}</Markdown></h3>
@@ -46,7 +44,7 @@ export default function Messages({messages, userSessionData}) {
                                         <Dropdown horizontal={"left"}>
                                             <Dropdown.Toggle size={"sm"}><MoreVertical /></Dropdown.Toggle>
                                             <Dropdown.Menu className="w-52">
-                                                <Dropdown.Item color={"primary"} onClick={() => DeleteMessage(message.id, userSessionData).then(response => {router.refresh();})}>Supprimer</Dropdown.Item>
+                                                <Dropdown.Item color={"primary"} onClick={() => DeleteMessage(message.id, userSessionData).then(() => {router.refresh();})}>Supprimer</Dropdown.Item>
                                             </Dropdown.Menu>
                                         </Dropdown>
                                         : null
