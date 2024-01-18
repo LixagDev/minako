@@ -1,7 +1,8 @@
 "use client"
-import {Modal, Input} from "react-daisyui";
+import {Modal, Input, Alert} from "react-daisyui";
 import M_Button from "@/components/component/M_Button";
 import {useState} from "react";
+import {Info} from "react-feather";
 import TextareaAutosize from "react-textarea-autosize";
 import axios from "axios";
 import {useRouter} from "next/navigation";
@@ -27,6 +28,7 @@ export default function ModalEditProfile({userSessionData, modalEditProfileVisib
             <Modal.Header className="font-bold">Éditer votre profil</Modal.Header>
             <Modal.Body>
                 <div className={"flex flex-col items-center w-full gap-4"}>
+                    <Alert icon={<Info/>} status={"info"}>L'avatar de profil est, pour le moment, synchronisé avec votre compte Discord.</Alert>
                     <div className={"flex flex-col w-full"}>
                         <h2>Nom</h2>
                         <Input placeholder={"Le gentleman"} value={othername} disabled={isLoading} maxLength={15}
