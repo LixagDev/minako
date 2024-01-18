@@ -77,6 +77,16 @@ export default async function UserPage({params, searchParams}){
             const userSessionData = await prisma.user.findUnique({
                 where:{
                     name: session.user.name,
+                },
+                select:{
+                    id: true,
+                    name: true,
+                    othername: true,
+                    settings: true,
+                    image: true,
+                    about: true,
+                    created_at: true,
+                    messages: true,
                 }
             });
 

@@ -26,8 +26,26 @@ export default async function Home({searchParams}){
         const userSessionData = await prisma.user.findUnique({
             where:{
                 name: session.user.name,
+            },
+            select:{
+                id: true,
+                name: true,
+                othername: true,
+                settings: true,
+                image: true,
+                about: true,
+                created_at: true,
+                messages: true,
             }
         });
+
+        if (!userSessionData.settings){
+            const createSetting = await prisma.settings.create({
+                data:{
+                    userId: userSessionData.id
+                }
+            })
+        }
 
         const messages = await prisma.message.findMany({
             where:{
