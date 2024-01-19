@@ -39,12 +39,12 @@ export default async function Home({searchParams}){
             }
         });
 
-        if (!userSessionData.settings){
+        if (!userSessionData.settings[0]){
             const createSetting = await prisma.settings.create({
                 data:{
                     userId: userSessionData.id
                 }
-            })
+            });
         }
 
         const messages = await prisma.message.findMany({
