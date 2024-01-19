@@ -72,6 +72,6 @@ export default async function Home({searchParams}){
                 </div>
                 <RightMenu/>
             </div>
-        );
+        )
     }
 }
