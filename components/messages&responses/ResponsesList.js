@@ -12,6 +12,14 @@ const MessageParent = dynamic(() => import("@/components/messages&responses/Mess
 
 export default function ResponsesList({messageParent, responses, userSessionData, skip}){
     const responseListDiv = useRef();
+    let wantMessage;
+
+    if (!messageParent.owner.settings[0]){
+        wantMessage = true;
+    }
+    else{
+        wantMessage = messageParent.owner.settings[0].wantResponse;
+    }
 
     return(
         <div ref={responseListDiv} className={"flex flex-col gap-3 w-full overflow-x-hidden overflow-y-scroll h-full pl-3 pr-3 pb-3"}>
@@ -19,7 +27,7 @@ export default function ResponsesList({messageParent, responses, userSessionData
             <BackBar content={`Messsage de ${messageParent.owner.name}`}/>
             <MessageParent messageParent={messageParent} userSessionData={userSessionData}/>
             {
-                messageParent.owner.settings[0].wantResponse ?
+                wantMessage ?
                     <>
                         <ResponseForm userSessionData={userSessionData} messageParent={messageParent}/>
                         <Messages messageParent={messageParent} userSessionData={userSessionData} messages={responses} skip={skip}
