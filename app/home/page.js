@@ -36,16 +36,8 @@ export default async function Home({searchParams}){
                 about: true,
                 created_at: true,
                 messages: true,
-            }
+            },
         });
-
-        if (!userSessionData.settings[0]){
-            const createSetting = await prisma.settings.create({
-                data:{
-                    userId: userSessionData.id
-                }
-            });
-        }
 
         const messages = await prisma.message.findMany({
             where:{
@@ -64,6 +56,14 @@ export default async function Home({searchParams}){
             take: 10,
         });
 
+        if (!userSessionData.settings[0]){
+            const createSettings = await prisma.settings.create({
+                data:{
+                    userId: userSessionData.id
+                }
+            })
+        }
+
         return(
             <div className={"flex justify-center h-full"}>
                 <LeftMenu userSessionData={userSessionData}/>
@@ -72,6 +72,6 @@ export default async function Home({searchParams}){
                 </div>
                 <RightMenu/>
             </div>
-        )
+        );
     }
 }

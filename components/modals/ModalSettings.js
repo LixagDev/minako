@@ -7,8 +7,19 @@ import {useRouter} from "next/navigation";
 
 export default function ModalSearch({settingsModalVisible, toggleModalSettings, userSessionData}){
     const [isLoading, setIsLoading] = useState(false);
-    const [wantResponse, setWantResponse] = useState(userSessionData.settings[0].wantResponse);
     const router = useRouter();
+    let isChecked;
+
+    console.log((!userSessionData.settings[0]))
+
+    if (!userSessionData.settings[0]){
+        isChecked = true;
+    }
+    else{
+        isChecked = userSessionData.settings[0].wantResponse;
+    }
+
+    const [wantResponse, setWantResponse] = useState(isChecked);
 
     const saveSettings = () => {
         setIsLoading(true);
