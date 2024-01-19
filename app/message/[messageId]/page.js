@@ -44,7 +44,18 @@ export default async function MessagePage({params, searchParams}){
                 id: true,
                 content: true,
                 created_at: true,
-                owner: true,
+                owner: {
+                    select:{
+                        id: true,
+                        name: true,
+                        othername: true,
+                        settings: true,
+                        image: true,
+                        about: true,
+                        created_at: true,
+                        messages: false,
+                    }
+                },
             }
         });
         if (messageParent){

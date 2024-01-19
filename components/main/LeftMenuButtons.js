@@ -26,8 +26,8 @@ export default function LeftMenuButtons({userSessionData, isDrawer}){
 
     return(
         <>
-            <ModalMessageForm userSessionData={userSessionData} modalMessageFormVisible={modalMessageFormVisible} toggleModalMessageForm={toggleModalMessageForm}/>
             <ModalSettings userSessionData={userSessionData} settingsModalVisible={settingsModalVisible} toggleModalSettings={toggleModalSettings} />
+            <ModalMessageForm userSessionData={userSessionData} modalMessageFormVisible={modalMessageFormVisible} toggleModalMessageForm={toggleModalMessageForm}/>
             <div className={"flex flex-col gap-3"}>
                 {
                     buttons.map((button) => {
@@ -36,7 +36,7 @@ export default function LeftMenuButtons({userSessionData, isDrawer}){
                         );
                     })
                 }
-                <M_Button disabled={true} onClick={toggleModalSettings} className={"w-full"} startIcon={<Settings/>} text={"Paramètres"}/>
+                <M_Button disabled={false} onClick={toggleModalSettings} className={"w-full"} startIcon={<Settings/>} text={"Paramètres"}/>
                 {!isDrawer ? <M_Button className={"w-full"} color={"primary"} onClick={() => toggleModalMessageForm()} startIcon={<Send/>} text={"Poster"}/> : null}
             </div>
         </>
