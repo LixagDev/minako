@@ -14,24 +14,6 @@ export const authOptions = {
         }),
     ],
     secret: process.env.NEXTAUTH_SECRET,
-    callbacks: {
-        async signIn({ user, account, profile, email, credentials }) {
-            const isAllowedToSignIn = true;
-            if (isAllowedToSignIn) {
-                const updateDiscordAvatar = await prisma.user.update({
-                    where:{
-                        id: user.id
-                    },
-                    data:{
-                        image: profile.image_url
-                    }
-                });
-                return true
-            } else {
-                return false
-            }
-        }
-    }
 }
 
 export default NextAuth(authOptions)
